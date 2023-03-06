@@ -5,3 +5,7 @@
   border: none;
   background-color: inherit;
 }
+
+.element__like:active {
+  background-image: url(../../../images/LikeAllBlack.png);
+}
