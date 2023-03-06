@@ -2,15 +2,11 @@
   max-width: 430px;
   min-height: 330px;
   background-color: #ffffff;
-  /* position: absolute; */
-  /* top: 25vw;
-  left: 38vw; */
   position: relative;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: baseline;
   border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 }
 
 @media screen and (max-width: 540px) {
