@@ -4,3 +4,10 @@
   border-radius: 50%;
   display: block;
 }
+
+@media screen and (max-width: 540px) {
+  .profile__avatar-pic {
+    padding-top: 5px;
+    padding-left: 2px;
+  }
+}

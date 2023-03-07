@@ -22,53 +22,53 @@
         <img src="./images/image.jpg" alt="Аватарка профиля" class="profile__avatar-pic" />
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button animation-effect"></button>
+          <button class="profile__edit-button" type="button"></button>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="profile__add-button animation-effect"></button>
+        <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements section content__section" aria-label="Лайкни понравившуюся фотку">
         <article class="element">
           <img class="element__mask-group" src="./images/karachaevsk.jpg"
             alt="Фото заброшенного здания в Карачаевске на фоне гор" />
-          <div class="element__group-titleAndLike">
+          <div class="element__group-title-and-like">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like animation-effect"></button>
+            <button class="element__like animation-effect" type="button"></button>
           </div>
         </article>
         <article class="element">
           <img class="element__mask-group" src="./images/elbrus.jpg" alt="Фото горы Эльбрус" />
-          <div class="element__group-titleAndLike">
+          <div class="element__group-title-and-like">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like animation-effect"></button>
+            <button class="element__like animation-effect" type="button"></button>
           </div>
         </article>
         <article class="element">
           <img class="element__mask-group" src="./images/dombay.jpg" alt="Фото гор региона Домбай" />
-          <div class="element__group-titleAndLike">
+          <div class="element__group-title-and-like">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like animation-effect"></button>
+            <button class="element__like animation-effect" type="button"></button>
           </div>
         </article>
         <article class="element">
           <img class="element__mask-group" src="./images/elbrus.jpg" alt="Фото горы Эльбрус" />
-          <div class="element__group-titleAndLike">
+          <div class="element__group-title-and-like">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like animation-effect"></button>
+            <button class="element__like animation-effect" type="button"></button>
           </div>
         </article>
         <article class="element">
           <img class="element__mask-group" src="./images/dombay.jpg" alt="Фото гор региона Домбай" />
-          <div class="element__group-titleAndLike">
+          <div class="element__group-title-and-like">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like animation-effect"></button>
+            <button class="element__like animation-effect" type="button"></button>
           </div>
         </article>
         <article class="element">
           <img class="element__mask-group" src="./images/1place-kosa.jpg" alt="Пейзаж красивой летней реки" />
-          <div class="element__group-titleAndLike">
+          <div class="element__group-title-and-like">
             <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__like animation-effect"></button>
+            <button class="element__like animation-effect" type="button"></button>
           </div>
         </article>
       </section>
@@ -79,24 +79,26 @@
 
     <section class="popup">
       <div class="popup__container">
-        <button class="popup__close animation-effect"></button>
+        <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form">
+        <form class="popup__form" name="popupProfileEditForm">
           <fieldset class="popup__fieldset">
             <label for="nameInput" class="popup__label">
-              <input type="text" class="popup__input-name" id="nameInput" placeholder="Ваше имя" name="yourName">
+              <input type="text" class="popup__input popup__input_edit_name" id="nameInput" placeholder="Ваше имя"
+                name="yourName">
             </label>
             <label for="jobInput" class="popup__label">
-              <input type="text" class="popup__input-job" id="jobInput" placeholder="Ваша должность" name="yourJob">
+              <input type="text" class="popup__input popup__input_edit_job" id="jobInput" placeholder="Ваша должность"
+                name="yourJob">
             </label>
-            <button class="popup__button-save-profile animation-effect" type="submit">Сохранить</button>
+            <button class="popup__button-save-profile" type="submit">Сохранить</button>
           </fieldset>
         </form>
       </div>
     </section>
 
   </div>
-  <script src="./script/index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

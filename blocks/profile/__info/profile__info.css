@@ -10,11 +10,12 @@
   column-gap: 18px;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 880px) {
   .profile__info {
-    padding-left: 19px;
+    /* padding-left: 19px; */
     padding-right: 19px;
     column-gap: 10px;
-    /*  grid-column: 1/4; */
+    padding-top: 25px;
+    padding-left: 46px;
   }
 }

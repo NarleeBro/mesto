@@ -1,5 +1,9 @@
 .element__mask-group {
+  margin: 0;
+  padding: 0;
   border-radius: 10px 10px 0 0;
   width: 100%;
   min-height: 282px;
+  display: block;
+  object-fit: cover;
 }
