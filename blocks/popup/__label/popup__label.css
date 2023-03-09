@@ -7,8 +7,8 @@
   padding-bottom: 0;
 }
 
-/* @media screen and (max-width: 540px) {
+@media screen and (max-width: 320px) {
   .popup__label {
-    padding: 0;
+    padding-bottom: 30px;
   }
-} */
+}
