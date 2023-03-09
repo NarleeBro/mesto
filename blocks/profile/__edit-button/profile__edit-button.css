@@ -21,5 +21,6 @@
     width: 18px;
     height: 18px;
     background-image: url(../../../images/EditButtonMobile.svg);
+    transform: translateY(10px);
   }
 }
