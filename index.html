@@ -28,7 +28,7 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements content__section" aria-label="Лайкни понравившуюся фотку">
-        <article class="element">
+        <!-- <article class="element">
           <img class="element__mask-group" src="./images/karachaevsk.jpg"
             alt="Фото заброшенного здания в Карачаевске на фоне гор" />
           <div class="element__group-title-and-like">
@@ -70,7 +70,7 @@
             <h2 class="element__title">Карачаево-Черкессия</h2>
             <button class="element__like" type="button"></button>
           </div>
-        </article>
+        </article> -->
       </section>
     </main>
     <footer class="footer section">
@@ -97,7 +97,7 @@
       </div>
     </section>
 
-    <!-- Попап добавления новой карчтоки -->
+    <!-- Попап создания новой карчтоки -->
     <section class="popup popup_section_create-card">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
@@ -120,11 +120,11 @@
 
     <!-- Попап откпытия картинки с увеличением на экран -->
     <section class="popup popup_section_increase-image">
-      <div class="popup__container">
+      <div class="popup__container-increase-image">
         <button class="popup__close" type="button"></button>
         <figure class="popup__figure">
           <img src="#" alt="Фотогалерея" class="popup__image">
-          <figcaption class="popup__figcaption"></figcaption>
+          <figcaption class="popup__figcaption-text"></figcaption>
         </figure>
         </fieldset>
         </form>
@@ -133,16 +133,14 @@
 
     <!-- Шаблон картинка + напдись + лайк + корзина -->
     <template class="template">
-      <section class="profile content__section">
-        <article class="element">
-          <img class="element__mask-group" src="#" alt="Шаблон" />
-          <div class="element__group-title-and-like">
-            <h2 class="element__title"></h2>
-            <button class="element__like" type="button"></button>
-          </div>
-          <button class="element__trash" type="button"></button>
-        </article>
-      </section>
+      <article class="element">
+        <img class="element__mask-group" src="#" alt="Шаблон" />
+        <div class="element__group-title-and-like">
+          <h2 class="element__title"></h2>
+          <button class="element__like" type="button"></button>
+        </div>
+        <button class="element__trash" type="button"></button>
+      </article>
     </template>
 
   </div>
