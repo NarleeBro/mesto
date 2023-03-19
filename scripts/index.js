@@ -15,7 +15,7 @@ const profileJobSubtitle = document.querySelector('.profile__subtitle');
 
 // Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector
 const openPopup = function () {
-    popupElement.classList.add('popup_opened');
+  popupEditProfile.classList.add('popup_opened');
     // Тут мы прописали, чтобы значение текста, которое написано на странице "Профиль", где имя "Кусто", передавалось в открывающийся попап
     nameInputElement.value = profileNameTitle.textContent;
     // Тут мы прописали, чтобы значение текста, которое написано на странице "Профиль", где должность "Исследоватеот океана", передавалось в открывающийся попап
@@ -80,25 +80,42 @@ const initialCards = [
     }
   ];
 
-  // Ищем необходимые элементы на странице по классам (можно по другим ижентификаторам)
-  //Шаблон картинка + напдись + лайк + корзина
-  const userCardsContainer = document.querySelector('.elements');
+// Ищем необходимые элементы на странице по классам (можно по другим ижентификаторам)
+//Шаблон картинка + напдись + лайк + корзина
+const userCardsContainer = document.querySelector('.elements');
 
-  const userTemplate = document.querySelector('.template').content;
-  const userCard = userTemplate.querySelector('.element');
-  const userImage = userCard.querySelector('.element__mask-group');
-  const userImageTitle = userTemplate.querySelector('.element__title');
-  const userImageButtonLike = userTemplate.querySelector('.element__like');
-  const userImageButtonTrash = userTemplate.querySelector('.element__trash');
+const userTemplate = document.querySelector('.template').content;
+const userCard = userTemplate.querySelector('.element');
+const userImage = userCard.querySelector('.element__mask-group');
+const userImageTitle = userTemplate.querySelector('.element__title');
+const userImageButtonLike = userTemplate.querySelector('.element__like');
+const userImageButtonTrash = userTemplate.querySelector('.element__trash');
   
 
 //Попап откпытия картинки с увеличением на экран
 const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
-const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
-console.log(popupIncreaseImage);
 
 
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
 const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create-card');
-console.log(popupFormCreateCard);
+const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
+const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
+console.log(imageUrlInputCreateCard);
+
+//создаем клон массива темплейт в новую переменную
+const createCard = function (name, link, alt) {
+  const cardElement = userTemplate.querySelector('.element').cloneNode(true);
+
+  cardElement.querySelector('.element__title').textContent = name;
+  cardElement.querySelector('.element__mask-group').src = link;
+  cardElement.querySelector('.element__mask-group').alt = alt;
+
+  userCardsContainer.append(cardElement);
+}
+
+
+//в карточки попадают данные из массива
+initialCards.forEach (function (item) {
+  createCard(item.name, item.link, item.alt);
+});
