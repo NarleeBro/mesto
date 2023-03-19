@@ -3,6 +3,7 @@ const popupElement = document.querySelector('.popup');
 const popupEditProfile = document.querySelector('.popup_section_edit-profile')
 const popupCloseButtonElement = popupElement.querySelector('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
+const popupOpenButtonAddElement = document.querySelector('.profile__add-button');
 
 const popupFormElement = document.querySelector('.popup__form'); //эту форму убрать, т.к. есть классы с модификаторами
 const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
@@ -24,7 +25,7 @@ const openPopup = function () {
 
 // Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попап
 const closePopup = function () {
-    popupElement.classList.remove('popup_opened');
+  popupEditProfile.classList.remove('popup_opened');
 }
 
 // Функция которая передает введенные значения в попапе на страницу при ее закрытии 
@@ -52,6 +53,7 @@ popupFormElement.addEventListener('submit', handleFormSubmit);
 // Слушатель, который дает возможность закрыть попап в любом месте экрана, кроме самой формы попап (применяется с функцией закрытия попап)*/
 /* popupElement.addEventListener('click', closePopupByClickOnOverlay); */
 
+/* ---------------------------------------------------------------------------------------------------- */
 // Мыссив для клонирования фотографий в template
 const initialCards = [
     {
@@ -83,39 +85,54 @@ const initialCards = [
 // Ищем необходимые элементы на странице по классам (можно по другим ижентификаторам)
 //Шаблон картинка + напдись + лайк + корзина
 const userCardsContainer = document.querySelector('.elements');
-
 const userTemplate = document.querySelector('.template').content;
 const userCard = userTemplate.querySelector('.element');
-const userImage = userCard.querySelector('.element__mask-group');
-const userImageTitle = userTemplate.querySelector('.element__title');
+/* const userImage = userCard.querySelector('.element__mask-group');
+const userImageTitle = userTemplate.querySelector('.element__title'); */
 const userImageButtonLike = userTemplate.querySelector('.element__like');
 const userImageButtonTrash = userTemplate.querySelector('.element__trash');
-  
-
+const templateList = document.querySelector('.tempale__list');
 //Попап откпытия картинки с увеличением на экран
 const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
-
-
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
 const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create-card');
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
-console.log(imageUrlInputCreateCard);
-
 //создаем клон массива темплейт в новую переменную
-const createCard = function (name, link, alt) {
-  const cardElement = userTemplate.querySelector('.element').cloneNode(true);
+const createCard = function (item) {
+  const cardElement = userTemplate.cloneNode(true);
 
-  cardElement.querySelector('.element__title').textContent = name;
-  cardElement.querySelector('.element__mask-group').src = link;
-  cardElement.querySelector('.element__mask-group').alt = alt;
+  const userImage = cardElement.querySelector('.element__mask-group');
+  const userImageTitle = cardElement.querySelector('.element__title');
 
-  userCardsContainer.append(cardElement);
+  userImageTitle.textContent = item.name;
+  userImage.src = item.link;
+  userImage.alt = item.name;
+  
+  setEventListeners(cardElement);
+   
+  return cardElement;
 }
-
 
 //в карточки попадают данные из массива
 initialCards.forEach (function (item) {
-  createCard(item.name, item.link, item.alt);
+  templateList.append(createCard(item));
 });
+
+//Удаление файла через корзину
+function handleDelete (event) {
+  
+	const card = event.target.closest('#fortrash');
+	card.remove();
+}
+
+function setEventListeners (cardElement) {
+  cardElement.querySelector('.element__trash').addEventListener('click', handleDelete);
+}
+
+/* // Лайк актив
+const likeAktive = cardElement.querySelector('.element__like');
+likeAktive.addEventListener('click', function (event) {
+  event.target.classList.toggle('element__like_active');
+}) */
