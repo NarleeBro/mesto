@@ -120,19 +120,21 @@ initialCards.forEach (function (item) {
   templateList.append(createCard(item));
 });
 
-//Удаление файла через корзину
+//функция Удаление файла через корзину
 function handleDelete (event) {
-  
-	const card = event.target.closest('#fortrash');
+  const card = event.target.closest('#fortrash');
 	card.remove();
 }
 
-function setEventListeners (cardElement) {
-  cardElement.querySelector('.element__trash').addEventListener('click', handleDelete);
-}
-
-/* // Лайк актив
-const likeAktive = cardElement.querySelector('.element__like');
-likeAktive.addEventListener('click', function (event) {
+//функция включателя/выключателя лайк
+function likeAktive (event) {
   event.target.classList.toggle('element__like_active');
-}) */
+};
+
+//обшая фунция для слушателей на странице
+function setEventListeners (cardElement) {
+  //слушатель на корзину 
+  cardElement.querySelector('.element__trash').addEventListener('click', handleDelete);
+//слушатель на лайк 
+  cardElement.querySelector('.element__like').addEventListener('click', likeAktive);
+}
