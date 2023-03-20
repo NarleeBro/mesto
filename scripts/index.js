@@ -87,8 +87,8 @@ const initialCards = [
 const userCardsContainer = document.querySelector('.elements');
 const userTemplate = document.querySelector('.template').content;
 const userCard = userTemplate.querySelector('.element');
-/* const userImage = userCard.querySelector('.element__mask-group');
-const userImageTitle = userTemplate.querySelector('.element__title'); */
+const userImage = userCard.querySelector('.element__mask-group');
+const userImageTitle = userTemplate.querySelector('.element__title');
 const userImageButtonLike = userTemplate.querySelector('.element__like');
 const userImageButtonTrash = userTemplate.querySelector('.element__trash');
 const templateList = document.querySelector('.tempale__list');
@@ -111,7 +111,7 @@ const createCard = function (item) {
   userImage.alt = item.name;
   
   setEventListeners(cardElement);
-   
+
   return cardElement;
 }
 
@@ -138,3 +138,13 @@ function setEventListeners (cardElement) {
 //слушатель на лайк 
   cardElement.querySelector('.element__like').addEventListener('click', likeAktive);
 }
+
+////////////////////Создание новой карточки из попап
+const handleNewCard = function (event) {
+  event.preventDefault();
+  const cardElement = createCard(userImageTitle.textContent = placeNameInputCreateCard.value, userImage.textContent = imageUrlInputCreateCard.value)
+  templateList.prepend(userCard);
+  popupCloseButtonElement();
+}
+
+popupFormCreateCard.addEventListener('click', handleNewCard);
