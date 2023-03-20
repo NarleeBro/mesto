@@ -3,12 +3,12 @@ const popupElement = document.querySelector('.popup');
 const popupEditProfile = document.querySelector('.popup_section_edit-profile')
 const popupCloseButtonElement = popupElement.querySelector('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
-const popupOpenButtonAddElement = document.querySelector('.profile__add-button');
 
-const popupFormElement = document.querySelector('.popup__form'); //эту форму убрать, т.к. есть классы с модификаторами
+/* const popupFormElement = document.querySelector('.popup__form'); */ //форма родитель, в ней ищем классы с модификаторами
 const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
-const nameInputElement = popupFormElement.querySelector('.popup__input_edit_name');
-const jobInputElement = popupFormElement.querySelector('.popup__input_edit_job');
+const popupOpenButtonAddElement = document.querySelector('.profile__add-button');
+const nameInputElement = popupFormEditProfile.querySelector('.popup__input_edit_name');
+const jobInputElement = popupFormEditProfile.querySelector('.popup__input_edit_job');
 
 const profileNameTitle = document.querySelector('.profile__title');
 const profileJobSubtitle = document.querySelector('.profile__subtitle');
@@ -49,7 +49,7 @@ closePopup();
 
 popupOpenButtonElement.addEventListener('click', openPopup);
 popupCloseButtonElement.addEventListener('click', closePopup);
-popupFormElement.addEventListener('submit', handleFormSubmit);
+popupFormEditProfile.addEventListener('submit', handleFormSubmit);
 // Слушатель, который дает возможность закрыть попап в любом месте экрана, кроме самой формы попап (применяется с функцией закрытия попап)*/
 /* popupElement.addEventListener('click', closePopupByClickOnOverlay); */
 
@@ -97,6 +97,8 @@ const popupIncreaseImage = document.querySelector('.popup_section_increase-image
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
 const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create-card');
+const popupButtonCloseCreateCard = popupCreateCard.querySelector('.popup__close-create-card');
+console.log(popupButtonCloseCreateCard)
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
 //создаем клон массива темплейт в новую переменную
@@ -139,12 +141,24 @@ function setEventListeners (cardElement) {
   cardElement.querySelector('.element__like').addEventListener('click', likeAktive);
 }
 
+///////////////////////
+// Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector
+const openPopupCreateCard = function () {
+  popupCreateCard.classList.add('popup_opened');
+}
+// Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попап
+const closePopupCreateCard = function () {
+  popupCreateCard.classList.remove('popup_opened');
+}
+// слушатель для открытия попап создания новой карчтоки
+popupOpenButtonAddElement.addEventListener('click', openPopupCreateCard);
+popupButtonCloseCreateCard.addEventListener('click', closePopupCreateCard);
 ////////////////////Создание новой карточки из попап
-const handleNewCard = function (event) {
+/* const handleNewCard = function (event) {
   event.preventDefault();
   const cardElement = createCard(userImageTitle.textContent = placeNameInputCreateCard.value, userImage.textContent = imageUrlInputCreateCard.value)
   templateList.prepend(userCard);
   popupCloseButtonElement();
 }
 
-popupFormCreateCard.addEventListener('click', handleNewCard);
+popupFormCreateCard.addEventListener('click', handleNewCard); */
