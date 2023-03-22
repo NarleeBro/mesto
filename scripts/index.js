@@ -94,11 +94,13 @@ const userImageButtonTrash = userTemplate.querySelector('.element__trash');
 const templateList = document.querySelector('.tempale__list');
 //Попап откпытия картинки с увеличением на экран
 const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
+const popupImageElement = document.querySelector('.popup__image');
+
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
 const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create-card');
 const popupButtonCloseCreateCard = popupCreateCard.querySelector('.popup__close-create-card');
-console.log(popupButtonCloseCreateCard)
+
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
 //создаем клон массива темплейт в новую переменную
@@ -141,24 +143,37 @@ function setEventListeners (cardElement) {
   cardElement.querySelector('.element__like').addEventListener('click', likeAktive);
 }
 
-///////////////////////
+
 // Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector
 const openPopupCreateCard = function () {
   popupCreateCard.classList.add('popup_opened');
 }
+
 // Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попап
 const closePopupCreateCard = function () {
   popupCreateCard.classList.remove('popup_opened');
 }
+
 // слушатель для открытия попап создания новой карчтоки
 popupOpenButtonAddElement.addEventListener('click', openPopupCreateCard);
 popupButtonCloseCreateCard.addEventListener('click', closePopupCreateCard);
-////////////////////Создание новой карточки из попап
-/* const handleNewCard = function (event) {
-  event.preventDefault();
-  const cardElement = createCard(userImageTitle.textContent = placeNameInputCreateCard.value, userImage.textContent = imageUrlInputCreateCard.value)
-  templateList.prepend(userCard);
-  popupCloseButtonElement();
-}
 
-popupFormCreateCard.addEventListener('click', handleNewCard); */
+////////////////////Создание новой карточки из попап
+const handleNewCard = function (event) {
+  event.preventDefault();
+  const placeNameImageURLElement = {
+    name: placeNameInputCreateCard.value,
+    link: imageUrlInputCreateCard.value,
+  };
+  //placeNameInputCreateCard.value = null/* placeNameInputCreateCard.textContent *//* '' */;
+  //imageUrlInputCreateCard.value = null/* placeNameInputCreateCard.textContent *//* '' */;
+  event.target.reset();
+  const placeInPage = createCard(placeNameImageURLElement);
+  templateList.prepend(placeInPage);
+  closePopupCreateCard(popupCreateCard); 
+ }
+//вешаем слушатель на кнопку создать с функией создания новой карточки
+popupFormCreateCard.addEventListener('submit', handleNewCard);
+
+//попап открытия карточки с увеличением размера
+
