@@ -1,11 +1,7 @@
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
-/* const popupElement = document.querySelector('.popup'); */
 const popupEditProfile = document.querySelector('.popup_section_edit-profile')
-/* const popupCloseButtonElement = document.querySelector('.popup__close'); */ 
 const popupCloseButtonElements = document.querySelectorAll('.popup__close');
-
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
-/* const popupFormElement = document.querySelector('.popup__form'); */ //форма родитель, в ней ищем классы с модификаторами
 const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit_profile');
 const popupOpenButtonAddElement = document.querySelector('.profile__add-button');
 const nameInputElement = popupFormEditProfile.querySelector('.popup__input_edit_name');
@@ -13,23 +9,16 @@ const jobInputElement = popupFormEditProfile.querySelector('.popup__input_edit_j
 const profileNameTitle = document.querySelector('.profile__title');
 const profileJobSubtitle = document.querySelector('.profile__subtitle');
 //Шаблон картинка + напдись + лайк + корзина
-/* const userCardsContainer = document.querySelector('.elements'); */
 const userTemplate = document.querySelector('.template').content;
-/* const userCard = userTemplate.querySelector('.element'); */
 const userImage = userTemplate.querySelector('.element__mask-group');
-/* const userImageTitle = userTemplate.querySelector('.element__title'); */
-/* const userImageButtonLike = userTemplate.querySelector('.element__like'); */
-/* const userImageButtonTrash = userTemplate.querySelector('.element__trash'); */
 const templateList = document.querySelector('.elements__list-template');
 //Попап откпытия картинки с увеличением на экран
 const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
 const popupImageElement = document.querySelector('.popup__image');
 const popupFigcaptionText = document.querySelector('.popup__figcaption-text');
-/* const popupButtonCloseIncreseImage = document.querySelector('.popup__close_increase-image'); */
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
 const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create_card');
-/* const popupButtonCloseCreateCard = popupCreateCard.querySelector('.popup__close_create-card'); */
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
 
