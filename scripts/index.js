@@ -5,7 +5,7 @@ const popupCloseButtonElement = popupElement.querySelector('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
 
 /* const popupFormElement = document.querySelector('.popup__form'); */ //форма родитель, в ней ищем классы с модификаторами
-const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
+const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit_profile');
 const popupOpenButtonAddElement = document.querySelector('.profile__add-button');
 const nameInputElement = popupFormEditProfile.querySelector('.popup__input_edit_name');
 const jobInputElement = popupFormEditProfile.querySelector('.popup__input_edit_job');
@@ -21,12 +21,12 @@ const openPopup = function () {
     nameInputElement.value = profileNameTitle.textContent;
     // Тут мы прописали, чтобы значение текста, которое написано на странице "Профиль", где должность "Исследоватеот океана", передавалось в открывающийся попап
     jobInputElement.value = profileJobSubtitle.textContent;
-}
+};
 
 // Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попап
 const closePopup = function () {
   popupEditProfile.classList.remove('popup_opened');
-}
+};
 
 // Функция которая передает введенные значения в попапе на страницу при ее закрытии 
 const handleFormSubmit = function (evt) {
@@ -36,7 +36,7 @@ const handleFormSubmit = function (evt) {
     // Тут мы прописали, чтобы значение текста, которое мы напишем в открывшемся попапе, где должность "Исследоватеот океана", передавалось при закрытии попапа на стараницу    
     profileJobSubtitle.textContent = jobInputElement.value;
     closePopup ();
-}
+};
 
 // Функция, которая дает возможность закрыть попап в любом месте экрана, кроме самой формы попап */
 /* const closePopupByClickOnOverlay = function (event) {
@@ -96,11 +96,11 @@ const templateList = document.querySelector('.elements__list-template');
 const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
 const popupImageElement = document.querySelector('.popup__image');
 const popupFigcaptionText = document.querySelector('.popup__figcaption-text');
-const popupButtonCloseIncreseImage = document.querySelector('.popup__close-increase-image');
+const popupButtonCloseIncreseImage = document.querySelector('.popup__close_increase-image');
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
-const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create-card');
-const popupButtonCloseCreateCard = popupCreateCard.querySelector('.popup__close-create-card');
+const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create_card');
+const popupButtonCloseCreateCard = popupCreateCard.querySelector('.popup__close_create-card');
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
 //создаем клон массива темплейт в новую переменную
@@ -124,7 +124,7 @@ const createCard = function (item) {
   setEventListeners(cardElement);
 
   return cardElement;
-}
+};
 
 //в карточки попадают данные из массива
 initialCards.forEach (function (item) {
@@ -135,7 +135,7 @@ initialCards.forEach (function (item) {
 function handleDelete (event) {
   const card = event.target.closest('#fortrash');
 	card.remove();
-}
+};
 //функция включателя/выключателя лайк
 function likeAktive (event) {
   event.target.classList.toggle('element__like_active');
@@ -148,16 +148,16 @@ function likeAktive (event) {
 function setEventListeners (cardElement) {
   cardElement.querySelector('.element__trash').addEventListener('click', handleDelete); //слушатель на корзину 
   cardElement.querySelector('.element__like').addEventListener('click', likeAktive); //слушатель на лайк 
-}
+};
 
 // Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector (для попап создания новой карточки)
 const openPopupCreateCard = function () {
   popupCreateCard.classList.add('popup_opened');
-}
+};
 // Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попапю (для попап создания новой карточки)ю
 const closePopupCreateCard = function () {
   popupCreateCard.classList.remove('popup_opened');
-}
+};
 // слушатель для открытия попап создания новой карчтоки
 popupOpenButtonAddElement.addEventListener('click', openPopupCreateCard);
 popupButtonCloseCreateCard.addEventListener('click', closePopupCreateCard);
@@ -175,17 +175,17 @@ const handleNewCard = function (event) {
   const placeInPage = createCard(placeNameImageURLElement);
   templateList.prepend(placeInPage);
   closePopupCreateCard(popupCreateCard); 
- }
+ };
 //вешаем слушатель на кнопку создать с функией создания новой карточки
 popupFormCreateCard.addEventListener('submit', handleNewCard);
 
 const openPopupLargeImage = function () {
   popupIncreaseImage.classList.add('popup_opened');
-}
+};
 
 //попап закрытия карточки с увеличением размера
 const closePopupLargeImage = function () {
   popupIncreaseImage.classList.remove('popup_opened');
-}
+};
 //слушатель для закрытия попап увеличения размера картинки
 popupButtonCloseIncreseImage.addEventListener('click', closePopupLargeImage);
