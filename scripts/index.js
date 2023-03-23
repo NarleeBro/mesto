@@ -91,7 +91,7 @@ const userImage = userCard.querySelector('.element__mask-group');
 const userImageTitle = userTemplate.querySelector('.element__title');
 const userImageButtonLike = userTemplate.querySelector('.element__like');
 const userImageButtonTrash = userTemplate.querySelector('.element__trash');
-const templateList = document.querySelector('.tempale__list');
+const templateList = document.querySelector('.elements__list-template');
 //Попап откпытия картинки с увеличением на экран
 const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
 const popupImageElement = document.querySelector('.popup__image');
@@ -140,6 +140,9 @@ function handleDelete (event) {
 function likeAktive (event) {
   event.target.classList.toggle('element__like_active');
 };
+
+/////////!!!!Функиця открытия 
+
 
 //обшая фунция для слушателей на странице (лайк, корзина)
 function setEventListeners (cardElement) {
