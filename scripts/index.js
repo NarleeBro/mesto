@@ -95,12 +95,12 @@ const templateList = document.querySelector('.tempale__list');
 //Попап откпытия картинки с увеличением на экран
 const popupIncreaseImage = document.querySelector('.popup_section_increase-image');
 const popupImageElement = document.querySelector('.popup__image');
-
+const popupFigcaptionText = document.querySelector('.popup__figcaption-text');
+const popupButtonCloseIncreseImage = document.querySelector('.popup__close-increase-image');
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
 const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create-card');
 const popupButtonCloseCreateCard = popupCreateCard.querySelector('.popup__close-create-card');
-
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
 //создаем клон массива темплейт в новую переменную
@@ -114,6 +114,13 @@ const createCard = function (item) {
   userImage.src = item.link;
   userImage.alt = item.name;
   
+  userImage.addEventListener('click', function () {
+    popupImageElement.src = item.link;
+    popupImageElement.alt = item.name;
+    popupFigcaptionText.textContent = item.name;
+    openPopupLargeImage(popupIncreaseImage)
+  })
+
   setEventListeners(cardElement);
 
   return cardElement;
@@ -129,31 +136,25 @@ function handleDelete (event) {
   const card = event.target.closest('#fortrash');
 	card.remove();
 }
-
 //функция включателя/выключателя лайк
 function likeAktive (event) {
   event.target.classList.toggle('element__like_active');
 };
 
-//обшая фунция для слушателей на странице
+//обшая фунция для слушателей на странице (лайк, корзина)
 function setEventListeners (cardElement) {
-  //слушатель на корзину 
-  cardElement.querySelector('.element__trash').addEventListener('click', handleDelete);
-//слушатель на лайк 
-  cardElement.querySelector('.element__like').addEventListener('click', likeAktive);
+  cardElement.querySelector('.element__trash').addEventListener('click', handleDelete); //слушатель на корзину 
+  cardElement.querySelector('.element__like').addEventListener('click', likeAktive); //слушатель на лайк 
 }
 
-
-// Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector
+// Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector (для попап создания новой карточки)
 const openPopupCreateCard = function () {
   popupCreateCard.classList.add('popup_opened');
 }
-
-// Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попап
+// Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попапю (для попап создания новой карточки)ю
 const closePopupCreateCard = function () {
   popupCreateCard.classList.remove('popup_opened');
 }
-
 // слушатель для открытия попап создания новой карчтоки
 popupOpenButtonAddElement.addEventListener('click', openPopupCreateCard);
 popupButtonCloseCreateCard.addEventListener('click', closePopupCreateCard);
@@ -165,7 +166,7 @@ const handleNewCard = function (event) {
     name: placeNameInputCreateCard.value,
     link: imageUrlInputCreateCard.value,
   };
-  //placeNameInputCreateCard.value = null/* placeNameInputCreateCard.textContent *//* '' */;
+  //placeNameInputCreateCard.value = null/* placeNameInputCreateCard.textContent *//* '' */;/* альтернативные варианты reset */
   //imageUrlInputCreateCard.value = null/* placeNameInputCreateCard.textContent *//* '' */;
   event.target.reset();
   const placeInPage = createCard(placeNameImageURLElement);
@@ -175,5 +176,13 @@ const handleNewCard = function (event) {
 //вешаем слушатель на кнопку создать с функией создания новой карточки
 popupFormCreateCard.addEventListener('submit', handleNewCard);
 
-//попап открытия карточки с увеличением размера
+const openPopupLargeImage = function () {
+  popupIncreaseImage.classList.add('popup_opened');
+}
 
+//попап закрытия карточки с увеличением размера
+const closePopupLargeImage = function () {
+  popupIncreaseImage.classList.remove('popup_opened');
+}
+//слушатель для закрытия попап увеличения размера картинки
+popupButtonCloseIncreseImage.addEventListener('click', closePopupLargeImage);
