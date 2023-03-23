@@ -1,7 +1,7 @@
 // Ищем необходимые элементы на странице по классам (можно по другим ижентификаторам)
-const popupElement = document.querySelector('.popup');
+/* const popupElement = document.querySelector('.popup'); */
 const popupEditProfile = document.querySelector('.popup_section_edit-profile')
-const popupCloseButtonElement = popupElement.querySelector('.popup__close');
+const popupCloseButtonElement = document.querySelector('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
 
 /* const popupFormElement = document.querySelector('.popup__form'); */ //форма родитель, в ней ищем классы с модификаторами
@@ -14,22 +14,8 @@ const profileNameTitle = document.querySelector('.profile__title');
 const profileJobSubtitle = document.querySelector('.profile__subtitle');
 
 
-// Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector
-const openPopup = function () {
-  popupEditProfile.classList.add('popup_opened');
-    // Тут мы прописали, чтобы значение текста, которое написано на странице "Профиль", где имя "Кусто", передавалось в открывающийся попап
-    nameInputElement.value = profileNameTitle.textContent;
-    // Тут мы прописали, чтобы значение текста, которое написано на странице "Профиль", где должность "Исследоватеот океана", передавалось в открывающийся попап
-    jobInputElement.value = profileJobSubtitle.textContent;
-};
-
-// Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попап
-const closePopup = function () {
-  popupEditProfile.classList.remove('popup_opened');
-};
-
-// Функция которая передает введенные значения в попапе на страницу при ее закрытии 
-const handleFormSubmit = function (evt) {
+//Функция которая передает введенные значения в попапе на страницу при ее закрытии 
+const handleFormEditProfileSubmit = function (evt) {
     evt.preventDefault();
     // Тут мы прописали, чтобы значение текста, которое мы напишем в открывшемся попапе, где имя "Кусто", передавалось при закрытии попапа на страницу
     profileNameTitle.textContent = nameInputElement.value;
@@ -37,6 +23,8 @@ const handleFormSubmit = function (evt) {
     profileJobSubtitle.textContent = jobInputElement.value;
     closePopup ();
 };
+
+popupFormEditProfile.addEventListener('submit', handleFormEditProfileSubmit);
 
 // Функция, которая дает возможность закрыть попап в любом месте экрана, кроме самой формы попап */
 /* const closePopupByClickOnOverlay = function (event) {
@@ -47,15 +35,12 @@ if (event.target !== event.currentTarget) {
 closePopup();
 }; */ 
 
-popupOpenButtonElement.addEventListener('click', openPopup);
-popupCloseButtonElement.addEventListener('click', closePopup);
-popupFormEditProfile.addEventListener('submit', handleFormSubmit);
 // Слушатель, который дает возможность закрыть попап в любом месте экрана, кроме самой формы попап (применяется с функцией закрытия попап)*/
-/* popupElement.addEventListener('click', closePopupByClickOnOverlay); */
+/* popupEditProfile.addEventListener('click', closePopupByClickOnOverlay); */
 
 /* ---------------------------------------------------------------------------------------------------- */
 // Мыссив для клонирования фотографий в template
-const initialCards = [
+/* const initialCards = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -80,7 +65,7 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-  ];
+  ]; */
 
 // Ищем необходимые элементы на странице по классам (можно по другим ижентификаторам)
 //Шаблон картинка + напдись + лайк + корзина
@@ -133,7 +118,8 @@ initialCards.forEach (function (item) {
 
 //функция Удаление файла через корзину
 function handleDelete (event) {
-  const card = event.target.closest('#fortrash');
+  const card = event.target.closest('.template__list');
+  console.log(card)
 	card.remove();
 };
 //функция включателя/выключателя лайк
@@ -141,26 +127,11 @@ function likeAktive (event) {
   event.target.classList.toggle('element__like_active');
 };
 
-/////////!!!!Функиця открытия 
-
-
 //обшая фунция для слушателей на странице (лайк, корзина)
 function setEventListeners (cardElement) {
   cardElement.querySelector('.element__trash').addEventListener('click', handleDelete); //слушатель на корзину 
   cardElement.querySelector('.element__like').addEventListener('click', likeAktive); //слушатель на лайк 
 };
-
-// Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector (для попап создания новой карточки)
-const openPopupCreateCard = function () {
-  popupCreateCard.classList.add('popup_opened');
-};
-// Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попапю (для попап создания новой карточки)ю
-const closePopupCreateCard = function () {
-  popupCreateCard.classList.remove('popup_opened');
-};
-// слушатель для открытия попап создания новой карчтоки
-popupOpenButtonAddElement.addEventListener('click', openPopupCreateCard);
-popupButtonCloseCreateCard.addEventListener('click', closePopupCreateCard);
 
 ////////////////////Создание новой карточки из попап
 const handleNewCard = function (event) {
@@ -179,11 +150,57 @@ const handleNewCard = function (event) {
 //вешаем слушатель на кнопку создать с функией создания новой карточки
 popupFormCreateCard.addEventListener('submit', handleNewCard);
 
+///////////!!!!!!!
+
+/* function openPopup (popup) {
+  popup.classList.add('popup_opened');
+}
+
+function closePopup (popup) {
+  popup.classList.remove('popup_opened');
+}
+
+popupOpenButtonElement.addEventListener('click', function () {
+  nameInputElement.value = profileNameTitle.textContent;
+  jobInputElement.value = profileJobSubtitle.textContent;
+  openPopup(popupEditProfile)
+}); */
+
+//111111111111 Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector
+const openPopup = function () {
+  popupEditProfile.classList.add('popup_opened');
+    // Тут мы прописали, чтобы значение текста, которое написано на странице "Профиль", где имя "Кусто", передавалось в открывающийся попап
+    nameInputElement.value = profileNameTitle.textContent;
+    // Тут мы прописали, чтобы значение текста, которое написано на странице "Профиль", где должность "Исследоватеот океана", передавалось в открывающийся попап
+    jobInputElement.value = profileJobSubtitle.textContent;
+};
+
+//111111111111 Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попап
+const closePopup = function () {
+  popupEditProfile.classList.remove('popup_opened');
+};
+
+popupOpenButtonElement.addEventListener('click', openPopup);
+popupCloseButtonElement.addEventListener('click', closePopup);
+
+//1111111111111 Функция которая добавляет класс к элементу, который мы нашли ранее через querySelector (для попап создания новой карточки)
+const openPopupCreateCard = function () {
+  popupCreateCard.classList.add('popup_opened');
+};
+//11111111111 Функция которая удаляет класс у элемента, который мы нашли ранее через querySelector. Далее мы эти функции будем использовать для открытия и закрытия попапю (для попап создания новой карточки)ю
+const closePopupCreateCard = function () {
+  popupCreateCard.classList.remove('popup_opened');
+};
+//1111111111111111111 слушатель для открытия попап создания новой карчтоки
+popupOpenButtonAddElement.addEventListener('click', openPopupCreateCard);
+popupButtonCloseCreateCard.addEventListener('click', closePopupCreateCard);
+
+//111111111111попап открытия карточки с увеличением размера
 const openPopupLargeImage = function () {
   popupIncreaseImage.classList.add('popup_opened');
 };
 
-//попап закрытия карточки с увеличением размера
+//111111111111попап закрытия карточки с увеличением размера
 const closePopupLargeImage = function () {
   popupIncreaseImage.classList.remove('popup_opened');
 };
