@@ -1,4 +1,5 @@
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
+const popupAllElementsOnPages = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_section_edit-profile')
 const popupCloseButtonElements = document.querySelectorAll('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
@@ -128,15 +129,11 @@ const popupAll = element.closest('.popup');
   })
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// Функция, которая дает возможность закрыть попап в любом месте экрана, кроме самой формы попап */
-/* const closePopupByClickOnOverlay = function (event) {
-console.log(event.target, event.currentTarget);
-if (event.target !== event.currentTarget) {
-    return;
-}
-closePopup();
-}; */ 
-
-// Слушатель, который дает возможность закрыть попап в любом месте экрана, кроме самой формы попап (применяется с функцией закрытия попап)*/
-/* popupEditProfile.addEventListener('click', closePopupByClickOnOverlay); */
+///
+popupAllElementsOnPages.forEach(function (element) {
+  element.addEventListener('click', function (event) {
+    if (event.target === event.currentTarget) {
+      closePopup(element);
+    }
+  })
+});
