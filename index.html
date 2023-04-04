@@ -39,15 +39,17 @@
       <div class="popup__container">
         <button class="popup__close popup__close_edit-profile" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form popup__form_edit_profile" name="popupEditProfileForm">
+        <form class="popup__form popup__form_edit_profile" name="popupEditProfileForm" novalidate>
           <fieldset class="popup__fieldset">
             <label for="nameInput" class="popup__label">
               <input type="text" class="popup__input popup__input_edit_name" id="nameInput" placeholder="Ваше имя"
-                name="yourName">
+                name="yourName" minlength="2" maxlength="40" required>
+                <span class="nameInput-error error"></span>
             </label>
             <label for="jobInput" class="popup__label">
               <input type="text" class="popup__input popup__input_edit_job" id="jobInput" placeholder="Ваша должность"
-                name="yourJob">
+                name="yourJob" minlength="2" maxlength="200" required>
+                <span class="jobInput-error error"></span>
             </label>
             <button class="popup__button-save-profile" type="submit">Сохранить</button>
           </fieldset>
@@ -60,15 +62,17 @@
       <div class="popup__container">
         <button class="popup__close popup__close_create-card" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form popup__form_create_card" name="popupCreateCardForm">
+        <form class="popup__form popup__form_create_card" name="popupCreateCardForm" novalidate>
           <fieldset class="popup__fieldset">
             <label for="placeNameInput" class="popup__label">
               <input type="text" class="popup__input popup__input_edit_place-name" id="placeNameInput"
-                placeholder="Название" name="placeName">
+                placeholder="Название" name="placeName" minlength="2" maxlength="30" required>
+                <span class="placeNameInput-error error"></span>
             </label>
             <label for="imageUrlInput" class="popup__label">
-              <input type="text" class="popup__input popup__input_edit_image-url" id="imageUrlInput"
-                placeholder="Ссылка на картинку" name="imageUrl">
+              <input type="url" class="popup__input popup__input_edit_image-url" id="imageUrlInput"
+                placeholder="Ссылка на картинку" name="imageUrl" required>
+                <span class="imageUrlInput-error error"></span>
             </label>
             <button class="popup__button-save-profile" type="submit">Создать</button>
           </fieldset>
@@ -102,6 +106,7 @@
     </template>
 
   </div>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>

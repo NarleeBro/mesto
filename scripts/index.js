@@ -119,17 +119,12 @@ popupOpenButtonAddElement.addEventListener('click', function () {
     openPopup(popupCreateCard)
 });
 
-//слушатель для открывания попап карточки с увеличением размера №3
-popupImageElement.addEventListener('click', function () {
-  openPopup(popupIncreaseImage)
-});
-
 //слушатель, котораый закрывает попапы методом перебора
 popupCloseButtonElements.forEach(function (element) {
+  //находим все попап через родителя по классу closest('.class')
+const popupAll = element.closest('.popup');
   element.addEventListener('click', function () {
-    closePopup(popupEditProfile);
-    closePopup(popupCreateCard);
-    closePopup(popupIncreaseImage);
+    closePopup(popupAll);  
   })
 });
 
