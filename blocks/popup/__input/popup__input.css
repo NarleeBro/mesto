@@ -19,7 +19,7 @@
   white-space: nowrap;
   height: 27px;
   padding-bottom: 13px;
-}
+  }
 
 @media screen and (max-width: 540px) {
   .popup__input {

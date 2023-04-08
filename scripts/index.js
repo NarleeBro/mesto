@@ -1,9 +1,11 @@
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
 const popupAllElementsOnPages = document.querySelectorAll('.popup');
+const popupForm = document.querySelector('.popup__form');
 const popupEditProfile = document.querySelector('.popup_section_edit-profile')
 const popupCloseButtonElements = document.querySelectorAll('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
 const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit_profile');
+
 const popupOpenButtonAddElement = document.querySelector('.profile__add-button');
 const nameInputElement = popupFormEditProfile.querySelector('.popup__input_edit_name');
 const jobInputElement = popupFormEditProfile.querySelector('.popup__input_edit_job');
@@ -20,8 +22,16 @@ const popupFigcaptionText = document.querySelector('.popup__figcaption-text');
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
 const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create_card');
+
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
+
+//константы для функции reset
+const buttonOfFormEditProfile = popupFormEditProfile.querySelector('.popup__button-save-profile');
+const inputListFormEditProfile = popupFormEditProfile.querySelectorAll('.popup__input');
+const buttonOfFormCreateCard = popupFormCreateCard.querySelector('.popup__button-save-profile');
+const inputListFormCreateCard = popupFormCreateCard.querySelectorAll('.popup__input');
+
 
 //Функция которая передает введенные значения в попапе на страницу при ее закрытии 
 const handleFormEditProfileSubmit = function (evt) {
@@ -87,8 +97,6 @@ const handleNewCard = function (event) {
     name: placeNameInputCreateCard.value,
     link: imageUrlInputCreateCard.value,
   };
-  //placeNameInputCreateCard.value = null/* placeNameInputCreateCard.textContent *//* '' */;/* альтернативные варианты reset */
-  //imageUrlInputCreateCard.value = null/* placeNameInputCreateCard.textContent *//* '' */;
   event.target.reset();
   const placeInPage = createCard(placeNameImageURLElement);
   templateList.prepend(placeInPage);
@@ -99,25 +107,39 @@ popupFormCreateCard.addEventListener('submit', handleNewCard);
 
 //универсальная функция открытия попап №all
 const openPopup = function (popup) {
-  /* function openPopup (popup) { */
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupFromEcs);
 }
+
 //универсальная функция закрытия попап №all
 const closePopup = function (popup) {
-/* function closePopup (popup) { */
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupFromEcs)
+}
+
+//функция закрытия по esc
+function closePopupFromEcs(evt) {
+  if(evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened)
+    }
 }
 
 //слушатель для открытия попап ред-я профиля с передачей значений со страницы в попап
 popupOpenButtonElement.addEventListener('click', function () {
+  resetErrorForOpenForm(popupFormEditProfile);
+  toggleButtonState(inputListFormEditProfile, buttonOfFormEditProfile, validationConfig.disableButtonClass);
   nameInputElement.value = profileNameTitle.textContent;
   jobInputElement.value = profileJobSubtitle.textContent;
-  openPopup(popupEditProfile)
+  openPopup(popupEditProfile);
 });
 
 //слушатель для открываения попап создания новой карточки №2
 popupOpenButtonAddElement.addEventListener('click', function () {
-    openPopup(popupCreateCard)
+  popupFormCreateCard.reset();
+  resetErrorForOpenForm(popupFormCreateCard);
+  toggleButtonState(inputListFormCreateCard, buttonOfFormCreateCard, validationConfig.disableButtonClass);
+  openPopup(popupCreateCard);
 });
 
 //слушатель, котораый закрывает попапы методом перебора
@@ -131,9 +153,69 @@ const popupAll = element.closest('.popup');
 
 ///
 popupAllElementsOnPages.forEach(function (element) {
-  element.addEventListener('click', function (event) {
+  element.addEventListener('mousedown', function (event) {
     if (event.target === event.currentTarget) {
       closePopup(element);
     }
   })
 });
+
+
+//////Валидация форм///////
+/* const enableValidation = ({ formSelector, ...rest }) => {
+  
+  const forms = Array.from(document.querySelectorAll(formSelector));
+    forms.forEach(popupForm => {
+    popupForm.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      })
+    setEventListenersVal(popupForm, rest)
+  })
+}
+
+const setEventListenersVal = (popupForm, {inputSelector, submitButtonSelector, ...rest}) => {
+  const formInputs = Array.from(popupForm.querySelectorAll(inputSelector));
+  const formButton = popupForm.querySelector(submitButtonSelector);
+  disableButton(formButton, rest);
+  formInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      ckeckInputValidity(input);
+      if (hasInvalidInput(formInputs)) {
+        disableButton(formButton, rest);
+      } else {
+        enableButton(formButton, rest);
+      }
+    })
+  })
+};
+ 
+
+const ckeckInputValidity = (input) => {
+  const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
+   
+  if (input.checkValidity()) {
+    currentInputErrorContainer.textContent = '';
+} else {
+  currentInputErrorContainer.textContent = input.validationMessage;
+  }
+}
+
+const hasInvalidInput = (formInputs) => {
+  return formInputs.some(item => !item.validity.valid);
+  }
+
+const enableButton = (button, {inactiveButtonClass, activeButtonClass})  => {
+  button.classList.remove(inactiveButtonClass);
+  button.classList.add(activeButtonClass);
+  button.removeAttribute('disabled');
+}
+
+const disableButton = (button, {inactiveButtonClass, activeButtonClass})  => {
+  button.classList.add(inactiveButtonClass);
+  button.classList.remove(activeButtonClass);
+  button.setAttribute('disabled', true);
+}
+
+enableValidation(validationConfig) */
+
+//// vebinar Fil

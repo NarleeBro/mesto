@@ -26,6 +26,12 @@
   cursor: pointer;
 }
 
+/* .popup__button-save-profile:disabled {
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  color: #e5e5e5;
+} */
+
 @media screen and (max-width: 540px) {
   .popup__button-save-profile {
     width: 238px;
