@@ -1,33 +1,35 @@
-const validationConfig = {
+const validationObject = {
   formSelector:  document.forms,
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save-profile",
 
-  errorSelectorTemplate: 'popup__error_type_',
+  currentInputErrorContainer: 'input.id',
   disableButtonClass: "popup__button-invalid",
   textErrorActive: 'error'
 };
 
-//!!!@@@!!!
-function enableValidation (config) {
-  const forms = Array.from(config.formSelector);
+//функция валидации
+function enableValidation (object) {
+  const forms = Array.from(object.formSelector);
   forms.forEach((form) => {
-    const inputList = form.querySelectorAll(config.inputSelector);
-    const button = form.querySelector(config.submitButtonSelector);
-    hangEventListener(inputList, button, config.errorSelectorTemplate, config.disableButtonClass, config.textErrorActive);
+    const inputList = form.querySelectorAll(object.inputSelector);
+    const button = form.querySelector(object.submitButtonSelector);
+    setEventListenerValidation(inputList, button, object.currentInputErrorContainer, object.disableButtonClass, object.textErrorActive);
   })
   }
 
-  function hangEventListener(inputList, button, errorSelectorTemplate, disableButtonClass, textErrorActive) {
+  //слушатели на импуты форм
+  function setEventListenerValidation(inputList, button, currentInputErrorContainer, disableButtonClass, textErrorActive) {
     inputList.forEach((input) => {
       input.addEventListener('input', () => {
-        checkValidity(input, errorSelectorTemplate, textErrorActive);
-        toggleButtonState(inputList, button, disableButtonClass);
+        checkValidity(input, currentInputErrorContainer, textErrorActive);
+        onOffButton(inputList, button, disableButtonClass);
         })
     })
   }
 
-  function checkValidity(input, errorSelectorTemplate, textErrorActive) {
+  //функция проверки валидности импутов
+  function checkValidity(input, currentInputErrorContainer, textErrorActive) {
     const errorTextElement = document.querySelector(`#${input.id}-error`);
     if(input.validity.valid) {
     hideInputError(input, errorTextElement, textErrorActive);
@@ -36,17 +38,20 @@ function enableValidation (config) {
   }
   }
 
+  //функция которая прячет текст ошибок красного цвета + полоска
   function hideInputError(input, errorTextElement, textErrorActive) {
     errorTextElement.textContent = '';
     errorTextElement.classList.remove(textErrorActive);
   }
 
+  //функция которая показывает текст ошибок красного цвета + полоска
   function showInputError(input, errorTextElement, textErrorActive) {
     errorTextElement.textContent = input.validationMessage;
     errorTextElement.classList.add(textErrorActive);
   }
 
-  function toggleButtonState(inputList, button, disableButtonClass) {
+  //функция которая включает/отключает кнопку в форме
+  function onOffButton(inputList, button, disableButtonClass) {
     if(hasValidInput(inputList)) {
       enableButton(button, disableButtonClass);
     } else {
@@ -54,28 +59,31 @@ function enableValidation (config) {
     }
   }
 
+  //функция которая проверяет валидность импутов
   function hasValidInput(inputList) {
-    return Array.from(inputList).every((input) => input.validity.valid); //можно через some сделать 1.07 время видео
-  }
+    return Array.from(inputList).every((input) => input.validity.valid);}
 
+    //функция которая стилизует добавляя/удалля класс
   function enableButton(button, disableButtonClass) {
     button.classList.remove(disableButtonClass);
-    
     button.removeAttribute('disabled');
   }
 
+  //функция которая стилизует добавляя/удалля класс
   function disableButton(button, disableButtonClass) {
     button.classList.add(disableButtonClass);
     button.setAttribute('disabled', true);
   }
 
-  function resetErrorForOpenForm(form) {
-    form.querySelectorAll(validationConfig.inputSelector).forEach((input) => {
+  //функция которая очищает ошибки красные
+  function resetErrorBeforeOpenForm(form) {
+    form.querySelectorAll(validationObject.inputSelector).forEach((input) => {
       const errorTextElement = document.querySelector(`#${input.id}-error`);
       if (!input.validity.valid) {
-        hideInputError(input, errorTextElement, validationConfig.textErrorActive)
+        hideInputError(input, errorTextElement, validationObject.textErrorActive)
       }
     })
   }
 
-  enableValidation(validationConfig)
+  //вызов функции валидации
+  enableValidation(validationObject)

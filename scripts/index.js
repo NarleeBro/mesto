@@ -76,7 +76,7 @@ initialCards.forEach (function (item) {
 //функция Удаление файла через корзину
 function handleDelete (event) {
   const card = event.target.closest('.template__list');
-  console.log(card)
+ // console.log(card)
 	card.remove();
 };
 //функция включателя/выключателя лайк
@@ -102,6 +102,7 @@ const handleNewCard = function (event) {
   templateList.prepend(placeInPage);
   closePopup(popupCreateCard);
  };
+
 //вешаем слушатель на кнопку создать с функией создания новой карточки
 popupFormCreateCard.addEventListener('submit', handleNewCard);
 
@@ -117,7 +118,7 @@ const closePopup = function (popup) {
   document.removeEventListener('keydown', closePopupFromEcs)
 }
 
-//функция закрытия по esc
+//функция закрытия попап по Escape
 function closePopupFromEcs(evt) {
   if(evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
@@ -127,8 +128,8 @@ function closePopupFromEcs(evt) {
 
 //слушатель для открытия попап ред-я профиля с передачей значений со страницы в попап
 popupOpenButtonElement.addEventListener('click', function () {
-  resetErrorForOpenForm(popupFormEditProfile);
-  toggleButtonState(inputListFormEditProfile, buttonOfFormEditProfile, validationConfig.disableButtonClass);
+  resetErrorBeforeOpenForm(popupFormEditProfile); //обнуляем красные ошибки
+  onOffButton(inputListFormEditProfile, buttonOfFormEditProfile, validationObject.disableButtonClass); //перекл
   nameInputElement.value = profileNameTitle.textContent;
   jobInputElement.value = profileJobSubtitle.textContent;
   openPopup(popupEditProfile);
@@ -137,8 +138,8 @@ popupOpenButtonElement.addEventListener('click', function () {
 //слушатель для открываения попап создания новой карточки №2
 popupOpenButtonAddElement.addEventListener('click', function () {
   popupFormCreateCard.reset();
-  resetErrorForOpenForm(popupFormCreateCard);
-  toggleButtonState(inputListFormCreateCard, buttonOfFormCreateCard, validationConfig.disableButtonClass);
+  resetErrorBeforeOpenForm(popupFormCreateCard); //обнуляем красные ошибки
+  onOffButton(inputListFormCreateCard, buttonOfFormCreateCard, validationObject.disableButtonClass);
   openPopup(popupCreateCard);
 });
 
@@ -151,7 +152,7 @@ const popupAll = element.closest('.popup');
   })
 });
 
-///
+///функция закрытия попап по оверлей
 popupAllElementsOnPages.forEach(function (element) {
   element.addEventListener('mousedown', function (event) {
     if (event.target === event.currentTarget) {
@@ -159,63 +160,3 @@ popupAllElementsOnPages.forEach(function (element) {
     }
   })
 });
-
-
-//////Валидация форм///////
-/* const enableValidation = ({ formSelector, ...rest }) => {
-  
-  const forms = Array.from(document.querySelectorAll(formSelector));
-    forms.forEach(popupForm => {
-    popupForm.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      })
-    setEventListenersVal(popupForm, rest)
-  })
-}
-
-const setEventListenersVal = (popupForm, {inputSelector, submitButtonSelector, ...rest}) => {
-  const formInputs = Array.from(popupForm.querySelectorAll(inputSelector));
-  const formButton = popupForm.querySelector(submitButtonSelector);
-  disableButton(formButton, rest);
-  formInputs.forEach(input => {
-    input.addEventListener('input', () => {
-      ckeckInputValidity(input);
-      if (hasInvalidInput(formInputs)) {
-        disableButton(formButton, rest);
-      } else {
-        enableButton(formButton, rest);
-      }
-    })
-  })
-};
- 
-
-const ckeckInputValidity = (input) => {
-  const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
-   
-  if (input.checkValidity()) {
-    currentInputErrorContainer.textContent = '';
-} else {
-  currentInputErrorContainer.textContent = input.validationMessage;
-  }
-}
-
-const hasInvalidInput = (formInputs) => {
-  return formInputs.some(item => !item.validity.valid);
-  }
-
-const enableButton = (button, {inactiveButtonClass, activeButtonClass})  => {
-  button.classList.remove(inactiveButtonClass);
-  button.classList.add(activeButtonClass);
-  button.removeAttribute('disabled');
-}
-
-const disableButton = (button, {inactiveButtonClass, activeButtonClass})  => {
-  button.classList.add(inactiveButtonClass);
-  button.classList.remove(activeButtonClass);
-  button.setAttribute('disabled', true);
-}
-
-enableValidation(validationConfig) */
-
-//// vebinar Fil
