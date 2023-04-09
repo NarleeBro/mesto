@@ -4,7 +4,9 @@ const popupForm = document.querySelector('.popup__form');
 const popupEditProfile = document.querySelector('.popup_section_edit-profile')
 const popupCloseButtonElements = document.querySelectorAll('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__edit-button');
-const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit_profile');
+/* const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit_profile'); */ //альтернативный вариант нахождения формы
+const popupFormEditProfile = document.forms['popupEditProfileForm'];
+
 
 const popupOpenButtonAddElement = document.querySelector('.profile__add-button');
 const nameInputElement = popupFormEditProfile.querySelector('.popup__input_edit_name');
@@ -21,7 +23,9 @@ const popupImageElement = document.querySelector('.popup__image');
 const popupFigcaptionText = document.querySelector('.popup__figcaption-text');
 //Попап создания новой карчтоки
 const popupCreateCard = document.querySelector('.popup_section_create-card');
-const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create_card');
+/* const popupFormCreateCard = popupCreateCard.querySelector('.popup__form_create_card'); */ //альтернативный вариант нахождения формы
+const popupFormCreateCard = document.forms['popupCreateCardForm'];
+
 
 const placeNameInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_place-name');
 const imageUrlInputCreateCard = popupFormCreateCard.querySelector('.popup__input_edit_image-url');
@@ -80,14 +84,14 @@ function handleDelete (event) {
 	card.remove();
 };
 //функция включателя/выключателя лайк
-function likeAktive (event) {
+function toggleLike (event) {
   event.target.classList.toggle('element__like_active');
 };
 
 //обшая фунция для слушателей на странице (лайк, корзина)
 function setEventListeners (cardElement) {
   cardElement.querySelector('.element__trash').addEventListener('click', handleDelete); //слушатель на корзину 
-  cardElement.querySelector('.element__like').addEventListener('click', likeAktive); //слушатель на лайк 
+  cardElement.querySelector('.element__like').addEventListener('click', toggleLike); //слушатель на лайк 
 };
 
 //функция создание новой карточки из попап
@@ -129,7 +133,7 @@ function closePopupFromEcs(evt) {
 //слушатель для открытия попап ред-я профиля с передачей значений со страницы в попап
 popupOpenButtonElement.addEventListener('click', function () {
   resetErrorBeforeOpenForm(popupFormEditProfile); //обнуляем красные ошибки
-  onOffButton(inputListFormEditProfile, buttonOfFormEditProfile, validationObject.disableButtonClass); //перекл
+  toggleButtonState(inputListFormEditProfile, buttonOfFormEditProfile, validationObject.disableButtonClass); //перекл
   nameInputElement.value = profileNameTitle.textContent;
   jobInputElement.value = profileJobSubtitle.textContent;
   openPopup(popupEditProfile);
@@ -139,16 +143,16 @@ popupOpenButtonElement.addEventListener('click', function () {
 popupOpenButtonAddElement.addEventListener('click', function () {
   popupFormCreateCard.reset();
   resetErrorBeforeOpenForm(popupFormCreateCard); //обнуляем красные ошибки
-  onOffButton(inputListFormCreateCard, buttonOfFormCreateCard, validationObject.disableButtonClass);
+  toggleButtonState(inputListFormCreateCard, buttonOfFormCreateCard, validationObject.disableButtonClass);
   openPopup(popupCreateCard);
 });
 
 //слушатель, котораый закрывает попапы методом перебора
 popupCloseButtonElements.forEach(function (element) {
   //находим все попап через родителя по классу closest('.class')
-const popupAll = element.closest('.popup');
+const popup = element.closest('.popup');
   element.addEventListener('click', function () {
-    closePopup(popupAll);  
+    closePopup(popup);  
   })
 });
 

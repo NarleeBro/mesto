@@ -1,5 +1,5 @@
 const validationObject = {
-  formSelector:  document.forms,
+  forms:  document.forms,
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save-profile",
 
@@ -10,7 +10,7 @@ const validationObject = {
 
 //функция валидации
 function enableValidation (object) {
-  const forms = Array.from(object.formSelector);
+  const forms = Array.from(object.forms);
   forms.forEach((form) => {
     const inputList = form.querySelectorAll(object.inputSelector);
     const button = form.querySelector(object.submitButtonSelector);
@@ -23,7 +23,7 @@ function enableValidation (object) {
     inputList.forEach((input) => {
       input.addEventListener('input', () => {
         checkValidity(input, currentInputErrorContainer, textErrorActive);
-        onOffButton(inputList, button, disableButtonClass);
+        toggleButtonState(inputList, button, disableButtonClass);
         })
     })
   }
@@ -51,7 +51,7 @@ function enableValidation (object) {
   }
 
   //функция которая включает/отключает кнопку в форме
-  function onOffButton(inputList, button, disableButtonClass) {
+  function toggleButtonState(inputList, button, disableButtonClass) {
     if(hasValidInput(inputList)) {
       enableButton(button, disableButtonClass);
     } else {
