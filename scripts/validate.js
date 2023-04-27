@@ -1,3 +1,5 @@
+
+
 const validationObject = {
   forms:  document.forms,
   inputSelector: ".popup__input",
@@ -51,7 +53,7 @@ function enableValidation (object) {
   }
 
   //функция которая включает/отключает кнопку в форме
-  function toggleButtonState(inputList, button, disableButtonClass) {
+   function toggleButtonState(inputList, button, disableButtonClass) {
     if(hasValidInput(inputList)) {
       enableButton(button, disableButtonClass);
     } else {
@@ -76,14 +78,16 @@ function enableValidation (object) {
   }
 
   //функция которая очищает ошибки красные
-  function resetErrorBeforeOpenForm(form) {
-    form.querySelectorAll(validationObject.inputSelector).forEach((input) => {
+  function resetErrorBeforeOpenForm(form, object) {
+    const button = form.querySelector(object.submitButtonSelector);
+    form.querySelectorAll(object.inputSelector).forEach((input) => {
       const errorTextElement = document.querySelector(`#${input.id}-error`);
       if (!input.validity.valid) {
-        hideInputError(input, errorTextElement, validationObject.textErrorActive)
+        hideInputError(input, errorTextElement, object.textErrorActive)
       }
+      disableButton(button, object.disableButtonClass)
     })
   }
 
   //вызов функции валидации
-  enableValidation(validationObject)
+  //enableValidation(validationObject)
