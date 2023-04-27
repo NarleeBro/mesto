@@ -11,14 +11,14 @@ export default class FormValidator {
   
     }
   //показываем ошибки текст+красная линия
-    _showInputError(errorTextElement, input) {
-      errorTextElement.classList.add(this._textErrorActive);
-      errorTextElement.textContent = input.validationMessage;
+    _showInputError() {
+      this._errorTextElement.classList.add(this._textErrorActive);
+      this._errorTextElement.textContent = this._input.validationMessage;
     }
   //скрываем ошибки текст+красная линия
-    _hideInputError(errorTextElement, input) {
-      errorTextElement.classList.remove(this._textErrorActive);
-      errorTextElement.textContent = '';
+    _hideInputError() {
+      this._errorTextElement.classList.remove(this._textErrorActive);
+      this._errorTextElement.textContent = '';
     }
   
     _enableButton() {
@@ -43,19 +43,20 @@ export default class FormValidator {
       }
     }
   //проверка валидности
-    _checkValidity(input) {
-      const errorTextElement = document.querySelector(`#${input.id}-error`);
-      if(input.validity.valid) {
-      this._hideInputError(errorTextElement, input);
+    _checkValidity() {
+      this._errorTextElement = document.querySelector(`#${this._input.id}-error`);
+      if(this._input.validity.valid) {
+      this._hideInputError();
     } else {
-      this._showInputError(errorTextElement, input);
+      this._showInputError();
     }
   }
   
     _setEventListener() {
       this._inputList.forEach(input => {
       input.addEventListener('input', () => {
-      this._checkValidity(input);
+      this._input = input;
+      this._checkValidity();
       this._toggleButtonState();
       });
     })
@@ -67,11 +68,14 @@ export default class FormValidator {
   //сброс ошибки перед открытием попап
     resetErrorBeforeOpenForm() {
     this._inputList.forEach(input => {
-    const errorTextElement = document.querySelector(`#${input.id}-error`);
+    this._input = input;
+    this._errorTextElement = document.querySelector(`#${this._input.id}-error`);
     if (!input.validity.valid) {
-      this._hideInputError(errorTextElement, input);
+      this._hideInputError();
     }
   })
   this._disableButton();
     }
   }
+
+  //////////////////////123
