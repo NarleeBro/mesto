@@ -1,5 +1,3 @@
-
-
 const validationObject = {
   forms:  document.forms,
   inputSelector: ".popup__input",

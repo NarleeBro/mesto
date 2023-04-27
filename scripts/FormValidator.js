@@ -10,12 +10,12 @@ export default class FormValidator {
       this._inputList = form.querySelectorAll(this._inputSelector);
   
     }
-  
+  //показываем ошибки текст+красная линия
     _showInputError(errorTextElement, input) {
       errorTextElement.classList.add(this._textErrorActive);
       errorTextElement.textContent = input.validationMessage;
     }
-  
+  //скрываем ошибки текст+красная линия
     _hideInputError(errorTextElement, input) {
       errorTextElement.classList.remove(this._textErrorActive);
       errorTextElement.textContent = '';
@@ -42,7 +42,7 @@ export default class FormValidator {
         this._disableButton(this._button);
       }
     }
-  
+  //проверка валидности
     _checkValidity(input) {
       const errorTextElement = document.querySelector(`#${input.id}-error`);
       if(input.validity.valid) {
@@ -53,7 +53,7 @@ export default class FormValidator {
   }
   
     _setEventListener() {
-    this._inputList.forEach(input => {
+      this._inputList.forEach(input => {
       input.addEventListener('input', () => {
       this._checkValidity(input);
       this._toggleButtonState();
@@ -64,9 +64,9 @@ export default class FormValidator {
     enableValidation() {
       this._setEventListener();
     }
-  
+  //сброс ошибки перед открытием попап
     resetErrorBeforeOpenForm() {
-  this._inputList.forEach(input => {
+    this._inputList.forEach(input => {
     const errorTextElement = document.querySelector(`#${input.id}-error`);
     if (!input.validity.valid) {
       this._hideInputError(errorTextElement, input);

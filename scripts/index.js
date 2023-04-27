@@ -1,5 +1,6 @@
+//импорты из других файлов
 import initialCards from "./cards.js";
-import Card from "./create.js";
+import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
@@ -41,7 +42,6 @@ const buttonOfFormCreateCard = popupFormCreateCard.querySelector('.popup__button
 const inputListFormCreateCard = popupFormCreateCard.querySelectorAll('.popup__input'); */
 
 const validationObject = {
-  //forms:  document.forms,
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save-profile",
 
@@ -70,117 +70,28 @@ function openImagePopup(cardData) {
 
 popupFormEditProfile.addEventListener("submit", handleFormEditProfileSubmit);
 
-
-
-//создаем клон массива темплейт в новую переменную
+//создаем клон массива template в новую переменную
 function createNewCard (element) {
   const card = new Card(element, selectorTemplate, openImagePopup);
   const cardElement = card.createCard();
   return cardElement;
 };
 
-//7777777777 функция добавления карточки в нужный контейнер
+//функция? которая добавляет карточки в нужный контейнер
 function addCard(container, card) {
   container.prepend(card);
 }
 
-
-/* class FormValidator {
-  constructor(object, form) {
-    this._inputSelector = object.inputSelector;
-    this._submitButtonSelector = object.submitButtonSelector;
-    this._currentInputErrorContainer = object.currentInputErrorContainer;
-    this._disableButtonClass = object.disableButtonClass;
-    this._textErrorActive = object.textErrorActive;
-    this._form = form;
-    this._button = form.querySelector(this._submitButtonSelector);
-    this._inputList = form.querySelectorAll(this._inputSelector);
-
-  }
-
-  _showInputError(errorTextElement, input) {
-    input.classList.add(this.__textErrorActive);
-    errorTextElement.textContent = input.validationMessage;
-  }
-
-  _hideInputError(errorTextElement, input) {
-    input.classList.remove(this.__textErrorActive);
-    errorTextElement.textContent = '';
-  }
-
-  _enableButton() {
-    this._button.classList.remove(this._disableButtonClass);
-    this._button.disabled = false;
-  }
-
-  _disableButton() {
-    this._button.classList.add(this._disableButtonClass);
-    this._button.disabled = true;
-  }
-
-  _hasValidInput() {
-    return Array.from(this._inputList).every((input) => input.validity.valid);
-  }
-
-  _toggleButtonState() {
-    if(this._hasValidInput()) {
-      this._enableButton();
-    } else {
-      this._disableButton(this._button);
-    }
-  }
-
-  _checkValidity(input) {
-    const errorTextElement = document.querySelector(`#${input.id}-error`);
-    console.log(errorTextElement)
-    if(input.validity.valid) {
-    this._hideInputError(errorTextElement, input);
-  } else {
-    this._showInputError(errorTextElement, input);
-  }
-}
-
-  _setEventListener() {
-  this._inputList.forEach(input => {
-    input.addEventListener('input', () => {
-    this._checkValidity(input);
-    this._toggleButtonState();
-    });
-  })
-}
-
-  enableValidation() {
-    /* this._button = this._form.querySelector(this._submitButtonSelector);
-    this._inputList = this._form.querySelectorAll(this._inputSelector); 
-    this._setEventListener();
-  }
-
-  resetErrorBeforeOpenForm() {
-this._inputList.forEach(input => {
-  const errorTextElement = document.querySelector(`#${input.id}-error`);
-  if (!input.validity.valid) {
-    this._hideInputError(errorTextElement, input);
-  }
-})
-this._disableButton();
-  }
-} */
-
 const popupFormEditProfileValidator = new FormValidator(validationObject, popupFormEditProfile);
-popupFormEditProfileValidator.enableValidation()
+popupFormEditProfileValidator.enableValidation();
 
 const popupFormCreateCardValidator = new FormValidator(validationObject, popupFormCreateCard);
-popupFormCreateCardValidator.enableValidation()
+popupFormCreateCardValidator.enableValidation();
 
-//7777777777  создание при загрузке страницы начальных карточек
+//создание при загрузке страницы начальных карточек
 initialCards.forEach((element) => {
   addCard(templateList, createNewCard(element));
 });
-
-//в карточки попадают данные из массива
-//initialCards.forEach (function (item) {
-//templateList.append(createCard(item));
-//});
 
 //функция Удаление файла через корзину
 function handleDelete(event) {
@@ -193,7 +104,7 @@ function toggleLike(event) {
   event.target.classList.toggle("element__like_active");
 }
 
-//обшая фунция для слушателей на странице (лайк, корзина)
+//обшая функция для слушателей на странице (лайк, корзина)
 function setEventListeners(cardElement) {
   cardElement
     .querySelector(".element__trash")
@@ -210,14 +121,10 @@ popupFormCreateCard.addEventListener("submit", (evt) => {
     name: placeNameInputCreateCard.value,
     link: imageUrlInputCreateCard.value,
   };
-  //evt.target.reset();
-  //templateList.prepend(placeInPage);
+  
   addCard(templateList, createNewCard(placeNameImageURLElement));
   closePopup(popupCreateCard);
 });
-
-//вешаем слушатель на кнопку создать с функией создания новой карточки
-/* popupFormCreateCard.addEventListener("submit", handleNewCard) */;
 
 //универсальная функция открытия попап №all
 const openPopup = function (popup) {
@@ -241,15 +148,9 @@ function closePopupFromEcs(evt) {
 
 //слушатель для открытия попап ред-я профиля с передачей значений со страницы в попап
 popupOpenButtonElement.addEventListener("click", function () {
-   //resetErrorBeforeOpenForm(popupFormEditProfile); //обнуляем красные ошибки
    popupFormEditProfile.reset();
    popupFormEditProfileValidator.resetErrorBeforeOpenForm();
-  /* toggleButtonState(
-    inputListFormEditProfile,
-    buttonOfFormEditProfile,
-    validationObject.disableButtonClass
-  );  */
-  nameInputElement.value = profileNameTitle.textContent;
+   nameInputElement.value = profileNameTitle.textContent;
   jobInputElement.value = profileJobSubtitle.textContent;
   openPopup(popupEditProfile);
 });
@@ -258,12 +159,6 @@ popupOpenButtonElement.addEventListener("click", function () {
 popupOpenButtonAddElement.addEventListener("click", function () {
   popupFormCreateCard.reset();
   popupFormCreateCardValidator.resetErrorBeforeOpenForm();
-  //resetErrorBeforeOpenForm(popupFormCreateCard); //обнуляем красные ошибки
-  /* toggleButtonState(
-    inputListFormCreateCard,
-    buttonOfFormCreateCard,
-    validationObject.disableButtonClass
-  ); */
   openPopup(popupCreateCard);
 });
 
