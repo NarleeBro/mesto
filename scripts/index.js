@@ -35,12 +35,6 @@ const imageUrlInputCreateCard = popupFormCreateCard.querySelector(".popup__input
 );
 const selectorTemplate = "#cardElement";
 
-//константы для функции reset
-/* const buttonOfFormEditProfile = popupFormEditProfile.querySelector('.popup__button-save-profile');
-const inputListFormEditProfile = popupFormEditProfile.querySelectorAll('.popup__input');
-const buttonOfFormCreateCard = popupFormCreateCard.querySelector('.popup__button-save-profile');
-const inputListFormCreateCard = popupFormCreateCard.querySelectorAll('.popup__input'); */
-
 const validationObject = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save-profile",
@@ -82,9 +76,11 @@ function addCard(container, card) {
   container.prepend(card);
 }
 
+//сделаем копию класса для формы редактирования профиля
 const popupFormEditProfileValidator = new FormValidator(validationObject, popupFormEditProfile);
 popupFormEditProfileValidator.enableValidation();
 
+//сделаем копию класса для формы создания карчтоки 
 const popupFormCreateCardValidator = new FormValidator(validationObject, popupFormCreateCard);
 popupFormCreateCardValidator.enableValidation();
 
