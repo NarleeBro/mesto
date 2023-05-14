@@ -8,7 +8,6 @@ export default class FormValidator {
       this._form = form;
       this._button = form.querySelector(this._submitButtonSelector);
       this._inputList = form.querySelectorAll(this._inputSelector);
-  
     }
   //показываем ошибки текст+красная линия
     _showInputError() {
