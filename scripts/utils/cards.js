@@ -34,11 +34,12 @@ const popupProfileSelector = '.popup_section_edit-profile';
 const popupAddCardSelector ='.popup_section_create-card';
 
 const popupImageSelector = '.popup_section_increase-image';
-const listsElementSelector = '.elements__list-template';
+const listsForTemplateElementSelector = '.elements__list-template';
 
 const formsValidator = {};
+//console.log(formsValidator)
 
-const configInfo = {
+const configProfileInfo = {
   //profileNameSelector: '.popup__input_edit_name',
   profileNameSelector: '.profile__title',
   
@@ -46,6 +47,7 @@ const configInfo = {
   //profileJobSelector: '.popup__input_edit_job'
   profileJobSelector: '.profile__subtitle'
 }
+//console.log(configProfileInfo)
 
 const validationObject = {
   inputSelector: ".popup__input",
@@ -55,6 +57,7 @@ const validationObject = {
   disableButtonClass: "popup__button-invalid",
   textErrorActive: 'error'
 };
+//console.log(validationObject)
 
 export {
   initialCards,
@@ -64,8 +67,8 @@ export {
   popupProfileSelector,
   popupAddCardSelector,
   popupImageSelector,
-  listsElementSelector,
+  listsForTemplateElementSelector,
   formsValidator,
-  configInfo,
+  configProfileInfo,
   validationObject
 };

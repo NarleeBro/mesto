@@ -14,12 +14,11 @@ import {
   popupProfileSelector,
   popupAddCardSelector,
   popupImageSelector,
-  listsElementSelector,
+  listsForTemplateElementSelector,
   formsValidator,
-  configInfo,
+  configProfileInfo,
   validationObject
 } from "./scripts/utils/cards.js";
-
 
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
 //const popupAllElementsOnPages = document.querySelectorAll(".popup");
@@ -47,9 +46,8 @@ import {
 //const placeNameInputCreateCard = popupFormCreateCard.querySelector(".popup__input_edit_place-name");
 //const imageUrlInputCreateCard = popupFormCreateCard.querySelector(".popup__input_edit_image-url");
 
-
-const userInfo = new UserInfo(configInfo);
-
+const userInfo = new UserInfo(configProfileInfo);
+//console.log(userInfo)
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners();
 
@@ -59,7 +57,7 @@ const section = new Section({
     const card = new Card(element, selectorTemplate, popupImage.open);
     return card.createCard();
   }
-}, listsElementSelector)
+}, listsForTemplateElementSelector)
 
 section.addCardFromArray();
 
