@@ -1,11 +1,11 @@
 //импорты из других файлов
-import Card from "./scripts/components/Card.js";
-import FormValidator from "./scripts/components/FormValidator.js";
+import Card from "../scripts/components/Card.js";
+import FormValidator from "../scripts/components/FormValidator.js";
 
-import PopupWithImage from "./scripts/components/PopupWithImage.js";
-import Section from "./scripts/components/Section.js";
-import UserInfo from "./scripts/components/UserInfo.js";
-import PopupWithForm from "./scripts/components/PopupWithForm.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import Section from "../scripts/components/Section.js";
+import UserInfo from "../scripts/components/UserInfo.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import {
   initialCards,
   popupOpenButtonElement,
@@ -18,7 +18,7 @@ import {
   formsValidator,
   configProfileInfo,
   validationObject
-} from "./scripts/utils/cards.js";
+} from "../scripts/utils/cards.js";
 
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
 //const popupAllElementsOnPages = document.querySelectorAll(".popup");
