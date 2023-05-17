@@ -8,18 +8,18 @@
   <meta name="description" content="Проектная работа Практикум" />
   <meta name="keywords" content="Практикум, проект Mesto Russia, JS основа" />
   <title>Проект "Mesto Russia"</title>
-  <link rel="icon" href="./src/images/favicon.png"><!-- 32×32 -->
-  <link rel="stylesheet" href="./src/pages/index.css" />
+  <link rel="icon" href="./images/fav2.png"><!-- 32×32 -->
+  
 </head>
 
 <body class="root">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="./src/images/logoSVG.svg" alt="Лого на английском языке Mesto Russia" />
+      <img class="header__logo" src="<%=require('./images/logoSVG.svg')%>" alt="Лого на английском языке Mesto Russia" />
     </header>
     <main class="content">
       <section class="profile content__section">
-        <img src="./src/images/image.jpg" alt="Аватарка профиля" class="profile__avatar-pic" />
+        <img src="<%=require('./images/image.jpg')%>" alt="Аватарка профиля" class="profile__avatar-pic" />
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button"></button>
@@ -103,7 +103,6 @@
 
   </div>
   
-  <script type="module" src="./src/pages/index.js"></script>
-</body>
+  </body>
 
 </html>

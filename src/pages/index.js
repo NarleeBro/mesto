@@ -19,6 +19,7 @@ import {
   configProfileInfo,
   validationObject
 } from "../scripts/utils/cards.js";
+import '../pages/index.css';
 
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
 //const popupAllElementsOnPages = document.querySelectorAll(".popup");

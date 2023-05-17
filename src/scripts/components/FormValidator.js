@@ -76,3 +76,5 @@ export default class FormValidator {
   this._disableButton();
     }
   }
+
+  console.log('hi')
