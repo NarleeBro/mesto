@@ -17,9 +17,9 @@ import {
   listsForTemplateElementSelector,
   formsValidator,
   configProfileInfo,
-  validationObject
+  validationObject,
 } from "../scripts/utils/cards.js";
-import '../pages/index.css';
+import "../pages/index.css";
 
 // Ищем необходимые элементы на странице по классам (можно по другим идентификаторам)
 //const popupAllElementsOnPages = document.querySelectorAll(".popup");
@@ -52,52 +52,54 @@ const userInfo = new UserInfo(configProfileInfo);
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners();
 
-const section = new Section({  
-  items: initialCards,
-  renderer: (element) => {
-    const card = new Card(element, selectorTemplate, popupImage.open);
-    return card.createCard();
-  }
-}, listsForTemplateElementSelector)
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (element) => {
+      const card = new Card(element, selectorTemplate, popupImage.open);
+      return card.createCard();
+    },
+  },
+  listsForTemplateElementSelector
+);
 
-section.addCardFromArray();
+section.renderItems();
 
 const popupProfile = new PopupWithForm(popupProfileSelector, (evt) => {
   evt.preventDefault();
-  userInfo.setUserInfo(popupProfile.getInputsValue())
+  userInfo.setUserInfo(popupProfile.getInputsValue());
   popupProfile.close();
-})
+});
 popupProfile.setEventListeners();
 //console.log(popupProfile)
 
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (evt) => {
   evt.preventDefault();
-  section.addItem(section.renderer(popupAddCard.getInputsValue()))
+  section.addItem(section.renderer(popupAddCard.getInputsValue()));
   popupAddCard.close();
 });
 //console.log(popupAddCard)
 popupAddCard.setEventListeners();
 
-
 // 777777777777777
-Array.from(document.forms).forEach(item => {
+Array.from(document.forms).forEach((item) => {
   const form = new FormValidator(validationObject, item);
   const name = item.name;
   formsValidator[name] = form;
   form.enableValidation();
-})
+});
 
 //слушатель для открытия попап ред-я профиля с передачей значений со страницы в попап
 /* popupOpenButtonElement.addEventListener("click", function () { */
-  popupOpenButtonElement.addEventListener("click", () => {
-   formsValidator.popupEditProfileForm.resetErrorBeforeOpenForm();
-   popupProfile.setInputsValue(userInfo.getUserInfo());
-   popupProfile.open();
- });
+popupOpenButtonElement.addEventListener("click", () => {
+  formsValidator.popupEditProfileForm.resetErrorBeforeOpenForm();
+  popupProfile.setInputsValue(userInfo.getUserInfo());
+  popupProfile.open();
+});
 
 //слушатель для открываения попап создания новой карточки №2
 /* popupOpenButtonAddElement.addEventListener("click", function () { */
-  popupOpenButtonAddElement.addEventListener("click", () => {
+popupOpenButtonAddElement.addEventListener("click", () => {
   /* popupFormCreateCard.reset(); */
   formsValidator.popupCreateCardForm.resetErrorBeforeOpenForm();
   /* openPopup(popupCreateCard); */
