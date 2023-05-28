@@ -3,6 +3,15 @@
   object-fit: cover;
   border-radius: 50%;
   display: block;
+
+  object-fit: cover;
+  position: relative;
+}
+
+.profile__avatar-pic:hover {
+  opacity: 0.3;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 540px) {

@@ -38,6 +38,9 @@ const popupAddCardSelector = ".popup_section_create-card";
 const popupImageSelector = ".popup_section_increase-image";
 const listsForTemplateElementSelector = ".elements__list-template";
 
+const popupAvatarSelector = '.popup_section_edit-avatar';
+const popupDeleteSelector = '.popup_section_delete';
+
 const formsValidator = {};
 //console.log(formsValidator)
 
@@ -70,6 +73,8 @@ export {
   popupAddCardSelector,
   popupImageSelector,
   listsForTemplateElementSelector,
+  popupAvatarSelector,
+  popupDeleteSelector,
   formsValidator,
   configProfileInfo,
   validationObject,

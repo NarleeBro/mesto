@@ -1,10 +1,11 @@
 export default class Card {
-  constructor(cardData, selectorTemplate, openImagePopup) {
+  constructor(cardData, selectorTemplate, openImagePopup, openDeletePopup) {
     this._cardData = cardData;
     this._link = cardData.link;
     this._name = cardData.placename;
     this._selectorTemplate = selectorTemplate;
     this._openImagePopup = openImagePopup;
+    this._openDeletePopup = openDeletePopup;
     this._cloneElement = document
       .querySelector(this._selectorTemplate)
       .content.querySelector(".template__list")
@@ -22,8 +23,7 @@ export default class Card {
   };
   //метод Удаление файла через корзину
   _handleDelete = () => {
-    this._cloneElement.remove();
-    this._cloneElement = null;
+    this._openDeletePopup(this);
   };
   //метод включателя/выключателя лайк
   _toggleLike = () => {
@@ -38,6 +38,12 @@ export default class Card {
       this._handleOpenImageInPopupImage
     );
   }
+
+  removeCard() {
+    this._cloneElement.remove();
+    this._cloneElement = null;
+  }
+
   //сосздание карточки
   createCard() {
     this._imageElement.src = this._link;

@@ -9,17 +9,20 @@
   <meta name="keywords" content="Практикум, проект Mesto Russia, JS основа" />
   <title>Проект "Mesto Russia"</title>
   <link rel="icon" href="./images/fav2.png"><!-- 32×32 -->
-  
+
 </head>
 
 <body class="root">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="<%=require('./images/logoSVG.svg')%>" alt="Лого на английском языке Mesto Russia" />
+      <img class="header__logo" src="<%=require('./images/logoSVG.svg')%>"
+        alt="Лого на английском языке Mesto Russia" />
     </header>
     <main class="content">
       <section class="profile content__section">
-        <img src="<%=require('./images/image.jpg')%>" alt="Аватарка профиля" class="profile__avatar-pic" />
+        <button type="button" class="profile__avatar-overlaybutton">
+          <img src="<%=require('./images/image.jpg')%>" alt="Аватарка профиля" class="profile__avatar-pic" />
+        </button>
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button"></button>
@@ -43,12 +46,12 @@
           <label for="nameInput" class="popup__label">
             <input type="text" class="popup__input popup__input_edit_name" id="nameInput" placeholder="Ваше имя"
               name="yourname" minlength="2" maxlength="40" required>
-            <span id ="nameInput-error" class="nameInput-error error"></span>
+            <span id="nameInput-error" class="nameInput-error error"></span>
           </label>
           <label for="jobInput" class="popup__label">
             <input type="text" class="popup__input popup__input_edit_job" id="jobInput" placeholder="Ваша должность"
               name="yourjob" minlength="2" maxlength="200" required>
-            <span id ="jobInput-error" class="jobInput-error error"></span>
+            <span id="jobInput-error" class="jobInput-error error"></span>
           </label>
           <button class="popup__button-save-profile popup__button-valid" type="submit">Сохранить</button>
         </form>
@@ -62,14 +65,14 @@
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form popup__form_create_card" name="popupCreateCardForm" novalidate>
           <label for="placeNameInput" class="popup__label">
-            <input type="text" class="popup__input popup__input_edit_place-name" id="placename"
-              placeholder="Название" name="placename" minlength="2" maxlength="30" required>
-            <span  id ="placename-error" class="placename-error error"></span>
+            <input type="text" class="popup__input popup__input_edit_place-name" id="placename" placeholder="Название"
+              name="placename" minlength="2" maxlength="30" required>
+            <span id="placename-error" class="placename-error error"></span>
           </label>
           <label for="imageUrlInput" class="popup__label">
             <input type="url" class="popup__input popup__input_edit_image-url" id="link"
               placeholder="Ссылка на картинку" name="link" required>
-            <span id ="link-error" class="link-error error"></span>
+            <span id="link-error" class="link-error error"></span>
           </label>
           <button class="popup__button-save-profile popup__button-valid" type="submit">Создать</button>
         </form>
@@ -84,6 +87,33 @@
           <img src="#" alt="Фотогалерея" class="popup__image">
           <figcaption class="popup__figcaption-text"></figcaption>
         </figure>
+      </div>
+    </section>
+
+    <!-- попап AVATAR пр9-->
+    <section class="popup popup_section_edit-avatar">
+      <div class="popup__container">
+        <button class="popup__close popup__close_edit-avatar" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form popup__form_edit-avatar" name="popupEditAvatarForm" novalidate>
+          <label for="imageUrlInput" class="popup__label">
+            <input type="url" class="popup__input popup__input_edit_image-url" id="avatar"
+              placeholder="Ссылка на картинку" name="avatar" required>
+            <span id="avatar-error" class="avatar-error error"></span>
+          </label>
+          <button class="popup__button-save-profile popup__button-valid" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- попап DELETE пр9-->
+    <section class="popup popup_section_delete">
+      <div class="popup__container">
+        <button class="popup__close popup__close_edit-avatar" type="button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form popup__form_edit-avatar" name="popupDeleteForm" novalidate>
+          <button class="popup__button-save-profile popup__button-valid" type="submit">Да</button>
+        </form>
       </div>
     </section>
 
@@ -102,7 +132,7 @@
     </template>
 
   </div>
-  
-  </body>
+
+</body>
 
 </html>
