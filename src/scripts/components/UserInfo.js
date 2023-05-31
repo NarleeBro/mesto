@@ -30,4 +30,13 @@ export default class UserInfo {
     //console.log(this._profileJob.textContent)
     /* close() */
   }
+  //99999gh
+setId(id) {
+  this._id = id;
 }
+
+getId() {
+  return this._id;
+}
+}
+

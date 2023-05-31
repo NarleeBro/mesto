@@ -154,12 +154,12 @@ const popupProfile = new PopupWithForm(popupProfileSelector, (data) => {
 });
 popupProfile.setEventListeners();
 //console.log(popupProfile)
-
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (data) => {
   //evt.preventDefault();
-  Promise.all([api.getInfo(), api.addCard(data)])
-    .then(([dataUser, dataCArd]) => {
-      dataCArd.myid = dataUser._id;
+  api.addCard(data)
+    .then(dataCArd => {
+      //console.log(userInfo.getId())
+      dataCArd.myid = userInfo.getId();
       section.addItem(createNewCard(dataCArd));
       //section.addItem(createNewCard(data));
       popupAddCard.close();
@@ -167,6 +167,7 @@ const popupAddCard = new PopupWithForm(popupAddCardSelector, (data) => {
     .catch((error) => console.error(`ERROR ТУТ ошибка popupAddCard ${error}`))
     .finally(() => popupAddCard.setupDefaultText())
 });
+
 //console.log(popupAddCard)
 popupAddCard.setEventListeners();
 ///99999999-1-14-00
@@ -230,6 +231,8 @@ Promise.all([api.getInfo(), api.getCards()])
       yourjob: dataUser.about,
       avatar: dataUser.avatar,
     });
+    //99999gh
+    userInfo.setId(dataUser._id)
     //console.log(dataUser)
     //console.log(dataCArd)
     section.renderItems(dataCArd);

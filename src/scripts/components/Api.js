@@ -1,6 +1,7 @@
 export default class Api {
     constructor(options) {
 this._url = options.baseUrl;
+//console.log(this._url)
 this._headers = options.headers;
 this._authorization = options.headers.authorization;
   }
@@ -61,7 +62,8 @@ addCard(data) {
 }
 
 addLike(cardId) {
-  return fetch('https://nomoreparties.co/v1/cohort-66/cards/cardId/likes', {
+ /*  return fetch('https://nomoreparties.co/v1/cohort-66/cards/cardId/likes', { */
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
     method: 'PUT',
     headers: {
       authorization: this._authorization,
@@ -71,7 +73,7 @@ addLike(cardId) {
 }
 
 deleteLike(cardId) {
-  return fetch('https://nomoreparties.co/v1/cohort-66/cards/cardId/likes', {
+  return fetch(`${this._url}/cards/${cardId}/likes`, {
     method: 'DELETE',
     headers: {
       authorization: this._authorization,
@@ -81,7 +83,7 @@ deleteLike(cardId) {
 }
 
 deleteCard(cardId) {
-  return fetch('https://nomoreparties.co/v1/cohort-66/cards/cardId', {
+  return fetch(`${this._url}/cards/${cardId}`, {
     method: 'DELETE',
     headers: {
       authorization: this._authorization,

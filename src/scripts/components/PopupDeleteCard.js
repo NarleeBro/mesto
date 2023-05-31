@@ -13,7 +13,7 @@ export default class PopupDeleteCard extends Popup {
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._submitButton.textContent = `${this._submitButton.textContent}...`;
-      this._submitFunction({card: this._element, cardId: this._cardId });
+      this._submitFunction({ element: this._element, cardId: this._cardId });
     });
   }
 
