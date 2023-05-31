@@ -11,6 +11,10 @@ export default class PopupWithForm extends Popup {
     this._inputList = this._form.querySelectorAll(".popup__input");
     //console.log(this._inputList)
     //console.log(getInputsValue());
+    ///99999999
+    this._submitButton = this._form.querySelector('.popup__button-save-profile');
+    //console.log(this._submitButton)
+    this._defaultButtonText = this._submitButton.textContent;
   }
 
   _getInputsValue() {
@@ -36,9 +40,15 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
+      this._submitButton.textContent = `${this._submitButton.textContent}...`;
       this._submitFunction(this._getInputsValue());
+      
       });
   }
+
+setupDefaultText() {
+  this._submitButton.textContent = this._defaultButtonText
+}
 
   close() {
     super.close();

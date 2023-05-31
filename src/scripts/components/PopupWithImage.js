@@ -14,9 +14,9 @@ export default class PopupWithImage extends Popup {
 
   open = (cardImageData) => {
     this._popupImage.src = cardImageData.link;
-    // console.log(this._cardImageData.src)
+    console.log(this._popupImage.src)
     this._popupImage.alt = cardImageData.placename;
-    // console.log(this._cardImageData.alt)
+    // console.log(this._popupImage.alt)
     this._imagePopupFigcaptionText.textContent = cardImageData.placename;
     //console.log(this._imagePopupFigcaptionText.textContent)
     super.open();

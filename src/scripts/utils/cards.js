@@ -1,4 +1,4 @@
-const initialCards = [
+/* const initialCards = [
   {
     placename: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -23,7 +23,7 @@ const initialCards = [
     placename: "Байкал",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
-];
+]; */
 
 const popupOpenButtonElement = document.querySelector(".profile__edit-button");
 const popupOpenButtonAddElement = document.querySelector(
@@ -51,6 +51,7 @@ const configProfileInfo = {
   //profileNameSelector: '#nameInput',
   //profileJobSelector: '.popup__input_edit_job'
   profileJobSelector: ".profile__subtitle",
+  profileAvatar: ".profile__avatar-pic",
 };
 //console.log(configProfileInfo)
 
@@ -65,7 +66,7 @@ const validationObject = {
 //console.log(validationObject)
 
 export {
-  initialCards,
+  /* initialCards, */
   popupOpenButtonElement,
   popupOpenButtonAddElement,
   selectorTemplate,

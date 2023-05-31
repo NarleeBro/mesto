@@ -8,6 +8,10 @@ export default class UserInfo {
       configProfileInfo.profileJobSelector
     );
     //console.log(this._profileJob)
+    this._profileAvatar = document.querySelector(
+      configProfileInfo.profileAvatar
+    );
+    //console.log(this._profileAvatar)
   }
 
   getUserInfo() {
@@ -17,10 +21,13 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo(dataFormUser) {
-    this._profileName.textContent = dataFormUser.yourname;
+  setUserInfo({ avatar, yourname, yourjob }) {
+    this._profileAvatar.src = avatar;
+    //console.log(this._profileAvatar.src)
+    this._profileName.textContent = yourname;
     //console.log(this._profileName.textContent)
-    this._profileJob.textContent = dataFormUser.yourjob;
+    this._profileJob.textContent = yourjob;
     //console.log(this._profileJob.textContent)
+    /* close() */
   }
 }

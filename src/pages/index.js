@@ -7,8 +7,9 @@ import Section from "../scripts/components/Section.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupDeleteCard from "../scripts/components/PopupDeleteCard.js";
+import Api from "../scripts/components/Api.js";
 import {
-  initialCards,
+  /* initialCards, */
   popupOpenButtonElement,
   popupOpenButtonAddElement,
   selectorTemplate,
@@ -50,24 +51,72 @@ import "../pages/index.css";
 //const placeNameInputCreateCard = popupFormCreateCard.querySelector(".popup__input_edit_place-name");
 //const imageUrlInputCreateCard = popupFormCreateCard.querySelector(".popup__input_edit_image-url");
 
+//пр9999999999999999999999
+/* initialCards.forEach(element => {
+  element.title = element.name;
+  delete element.name; 
+}) */
+
+
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-66",
+  headers: {
+    authorization: "e831aae7-60b4-4f1e-b303-432cbd525640",
+    "Content-Type": "application/json",
+  },
+});
+
+/* api.getCards()
+.then(res => console.log(res)) */
+/* api.getInfo()
+.then(res => console.log(res)); */
+//console.log(api)
+//0000000000
+
 const userInfo = new UserInfo(configProfileInfo);
 //console.log(userInfo)
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners();
 
-const deletePopupCard = new PopupDeleteCard(popupDeleteSelector, (element) => {
-element.removeCard();
-deletePopupCard.close();
-})
+const deletePopupCard = new PopupDeleteCard(popupDeleteSelector, ({element, cardId}) => {
+  api.deleteCard(cardId)
+  .then(() => {
+    element.removeCard()
+    deletePopupCard.close();
+  })
+  .catch((error) => console.error(`ERROR ТУТ ошибка deletePopupCard ${error}`))
+  .finally(() => deletePopupCard.setupDefaultText()); 
+});
 
 deletePopupCard.setEventListeners();
 //console.log(deletePopupCard)
-function createNewCard (element) {
-  const card = new Card(element, selectorTemplate, popupImage.open, deletePopupCard.open);
+function createNewCard(element) {
+  const card = new Card(element, selectorTemplate, popupImage.open, deletePopupCard.open, (likeElement, cardId) => {
+      if (likeElement.classList.contains("element__like_active")) {
+        api.deleteLike(cardId)
+          .then((res) => {
+            //console.log(res);
+            card.toggleLike(res.likes);
+          })
+          .catch((error) =>
+            console.error(`ERROR ТУТ ошибка createNewCard deleteLike ${error}`)
+          );
+      } else {
+        api.addLike(cardId)
+          .then((res) => {
+            //console.log(res);
+            card.toggleLike(res.likes);
+          })
+          .catch((error) =>
+            console.error(`ERROR ТУТ ошибка createNewCard addLike ${error}`)
+          );
+      }
+    }
+  );
   return card.createCard();
 }
 
-const section = new Section(
+/* const section = new Section(
   {
     items: initialCards,
     renderer: (element) => {
@@ -77,28 +126,65 @@ const section = new Section(
   listsForTemplateElementSelector
 );
 
-section.renderItems();
+section.renderItems(); */
+
+//пр999999999999991815
+const section = new Section((element) => {
+  section.addItem(createNewCard(element));
+}, listsForTemplateElementSelector);
+
+//section.renderItems(initialCards)
+
+//0000000000000000000000000000000
 
 const popupProfile = new PopupWithForm(popupProfileSelector, (data) => {
   //evt.preventDefault();
-  userInfo.setUserInfo(data);
-  popupProfile.close();
+  api.setUserInfo(data)
+    .then((res) => {
+      userInfo.setUserInfo({
+        avatar: res.avatar,
+        yourname: res.name,
+        yourjob: res.about,
+      });
+      popupProfile.close();
+    })
+    .catch((error) => console.error(`ERROR ТУТ ошибка popupProfile ${error}`))
+    .finally(() => popupProfile.setupDefaultText())
+  
 });
 popupProfile.setEventListeners();
 //console.log(popupProfile)
 
 const popupAddCard = new PopupWithForm(popupAddCardSelector, (data) => {
   //evt.preventDefault();
-  section.addItem(createNewCard(data));
-  popupAddCard.close();
+  Promise.all([api.getInfo(), api.addCard(data)])
+    .then(([dataUser, dataCArd]) => {
+      dataCArd.myid = dataUser._id;
+      section.addItem(createNewCard(dataCArd));
+      //section.addItem(createNewCard(data));
+      popupAddCard.close();
+    })
+    .catch((error) => console.error(`ERROR ТУТ ошибка popupAddCard ${error}`))
+    .finally(() => popupAddCard.setupDefaultText())
 });
 //console.log(popupAddCard)
 popupAddCard.setEventListeners();
-
-const popupEditAvatar = new PopupWithForm (popupAvatarSelector, (data) => {
-  document.querySelector('.profile__avatar-pic').src = data.avatar;
-  popupEditAvatar.close();
-})
+///99999999-1-14-00
+const popupEditAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
+  api.setNewAvatar(data)
+    .then((res) => {
+      //console.log(res)
+      userInfo.setUserInfo({
+        yourname: res.name,
+        yourjob: res.about,
+        avatar: res.avatar,
+      });
+      popupEditAvatar.close();
+    })
+    .catch((error) => console.error(`ERROR ТУТ ошибка popupEditAvatar ${error}`))
+    .finally(() => popupEditAvatar.setupDefaultText())
+  
+});
 //console.log(popupEditAvatar)
 popupEditAvatar.setEventListeners();
 // 777777777777777
@@ -108,6 +194,7 @@ Array.from(document.forms).forEach((item) => {
   formsValidator[name] = form;
   form.enableValidation();
 });
+
 //console.log(formsValidator)
 //слушатель для открытия попап ред-я профиля с передачей значений со страницы в попап
 /* popupOpenButtonElement.addEventListener("click", function () { */
@@ -126,10 +213,28 @@ popupOpenButtonAddElement.addEventListener("click", () => {
   popupAddCard.open();
 });
 
-document.querySelector('.profile__avatar-overlaybutton').addEventListener('click', () => {
-  formsValidator.popupEditAvatarForm.resetErrorBeforeOpenForm();
-  popupEditAvatar.open();
-})
+document
+  .querySelector(".profile__avatar-overlaybutton")
+  .addEventListener("click", () => {
+    formsValidator.popupEditAvatarForm.resetErrorBeforeOpenForm();
+    popupEditAvatar.open();
+  });
+
+Promise.all([api.getInfo(), api.getCards()])
+  .then(([dataUser, dataCArd]) => {
+    //console.log(dataCArd)
+    dataCArd.forEach((element) => (element.myid = dataUser._id));
+    //console.log(dataCArd)
+    userInfo.setUserInfo({
+      yourname: dataUser.name,
+      yourjob: dataUser.about,
+      avatar: dataUser.avatar,
+    });
+    //console.log(dataUser)
+    //console.log(dataCArd)
+    section.renderItems(dataCArd);
+  })
+  .catch((error) => console.error(`ERROR ТУТ ошибка PROMISE.ALL ${error}`));
 
 /* //функция? которая добавляет карточки в нужный контейнер
 function addCard(container, card) {
