@@ -30,6 +30,9 @@
 @import url(../blocks/element/__counter/element__counter.css);
 @import url(../blocks/element/__trash/element__trash.css);
 
+@import url(../blocks/element/__trashvision/element__trashvision.css);
+@import url(../blocks/element/__trashnovision/element__trashnovision.css);
+
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 

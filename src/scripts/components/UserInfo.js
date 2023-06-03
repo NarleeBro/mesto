@@ -31,12 +31,11 @@ export default class UserInfo {
     /* close() */
   }
   //99999gh
-setId(id) {
-  this._id = id;
-}
+  setId(id) {
+    this._id = id;
+  }
 
-getId() {
-  return this._id;
+  getId() {
+    return this._id;
+  }
 }
-}
-

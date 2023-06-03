@@ -15,11 +15,7 @@ export default class Section {
     /* this._container.prepend(elementDom); */
     this._container.prepend(elementDom);
   }
-  
 }
-
-
-
 
 /* export default class Section {
   constructor({ items, renderer }, containerSelector) {

@@ -1,10 +1,12 @@
 import Popup from "./Popup.js";
 
 export default class PopupDeleteCard extends Popup {
-  constructor(popupSelector, submitFunction) {
+  constructor(popupSelector, submitFoo) {
     super(popupSelector);
-    this._submitFunction = submitFunction;
-    this._submitButton = this._form.querySelector('.popup__button-save-profile');
+    this._submitFoo = submitFoo;
+    this._submitButton = this._form.querySelector(
+      ".popup__button-save-profile"
+    );
     this._defaultButtonText = this._submitButton.textContent;
   }
 
@@ -13,12 +15,13 @@ export default class PopupDeleteCard extends Popup {
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._submitButton.textContent = `${this._submitButton.textContent}...`;
-      this._submitFunction({ element: this._element, cardId: this._cardId });
+      this._submitFoo({ element: this._element, cardId: this._cardId });
     });
   }
 
   setupDefaultText() {
-    this._submitButton.textContent = this._defaultButtonText};
+    this._submitButton.textContent = this._defaultButtonText;
+  }
 
   open = ({ element, cardId }) => {
     super.open();

@@ -49,7 +49,7 @@ export default class Card {
   };
   //метод Удаление файла через корзину
   _handleDelete = () => {
-    this._openDeletePopup({element: this, cardId: this._cardId });
+    this._openDeletePopup({ element: this, cardId: this._cardId });
   };
   //метод включателя/выключателя лайк
   _toggleLike = () => {
@@ -66,11 +66,13 @@ export default class Card {
     );
   }
 
-  //99999999-5038
+  //99999999-
   _changeVisibleForTrashButton() {
-    this._myId === this._ownerId
-      ? (this._trashElement.style.display = "block")
-      : (this._trashElement.style.display = "none");
+    if (this._myId === this._ownerId) {
+      this._trashElement.classList.add("element__trashvision");
+    } else {
+      this._trashElement.classList.add("element__trashnovision");
+    }
   }
 
   _checkLikesStatus() {
