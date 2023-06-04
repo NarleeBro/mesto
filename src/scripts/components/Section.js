@@ -15,6 +15,11 @@ export default class Section {
     /* this._container.prepend(elementDom); */
     this._container.prepend(elementDom);
   }
+
+  addItemAppend(elementDom) {
+    this._container.append(elementDom);
+  }
+
 }
 
 /* export default class Section {

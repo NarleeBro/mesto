@@ -131,7 +131,7 @@ section.renderItems(); */
 
 //пр999999999999991815
 const section = new Section((element) => {
-  section.addItem(createNewCard(element));
+  section.addItemAppend(createNewCard(element));
 }, listsForTemplateElementSelector);
 
 //section.renderItems(initialCards)
