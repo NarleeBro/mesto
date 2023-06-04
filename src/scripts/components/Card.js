@@ -6,28 +6,18 @@ export default class Card {
     openDeletePopup,
     changeLike
   ) {
-    //console.log(cardData)
     this._cardData = cardData;
-    //console.log(this._cardData)
     this._link = cardData.link;
-    //console.log(this._link)
     this._name = cardData.name;
-    //console.log(this._name)
     this._myId = cardData.myid;
-    //console.log(this._myId)
     this._likes = cardData.likes;
-    //console.log(this._likes)
     this._likesLength = cardData.likes.length;
-    //console.log(this._likesLength)
     this._ownerId = cardData.owner._id;
-    //console.log(this._ownerId)
     this._cardId = cardData._id;
-    //console.log(this._cardId)
     this._selectorTemplate = selectorTemplate;
     this._openImagePopup = openImagePopup;
     this._openDeletePopup = openDeletePopup;
     this._changeLike = changeLike;
-    //console.log(this._changeLike)
     this._cloneElement = document
       .querySelector(this._selectorTemplate)
       .content.querySelector(".template__list")
@@ -38,11 +28,9 @@ export default class Card {
     this._likeIconElement = this._cloneElement.querySelector(".element__like");
     this._trashElement = this._cloneElement.querySelector(".element__trash");
     this._subTitle = this._cloneElement.querySelector(".element__title");
-    //console.log(this._myId)
-    //console.log(this._ownerId)
     this._counter = this._cloneElement.querySelector(".element__counter");
-    //console.log(this._counter)
   }
+
   //метод открытия картинки в увеличенном размере
   _handleOpenImageInPopupImage = () => {
     this._openImagePopup(this._cardData);
@@ -66,7 +54,6 @@ export default class Card {
     );
   }
 
-  //99999999-
   _changeVisibleForTrashButton() {
     if (this._myId === this._ownerId) {
       this._trashElement.classList.add("element__trashvision");
@@ -100,7 +87,6 @@ export default class Card {
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
     this._subTitle.textContent = this._name;
-    //99999
     this._checkLikesStatus();
     this._changeVisibleForTrashButton();
     this._setEventListener();

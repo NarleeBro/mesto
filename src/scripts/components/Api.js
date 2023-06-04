@@ -1,7 +1,6 @@
 export default class Api {
   constructor(options) {
     this._url = options.baseUrl;
-    //console.log(this._url)
     this._headers = options.headers;
     this._authorization = options.headers.authorization;
   }
@@ -25,7 +24,7 @@ export default class Api {
       },
     }).then(this._checkRes);
   }
-  //99999
+
   setUserInfo(data) {
     return fetch("https://nomoreparties.co/v1/cohort-66/users/me", {
       method: "PATCH",
@@ -59,7 +58,6 @@ export default class Api {
   }
 
   addLike(cardId) {
-    /*  return fetch('https://nomoreparties.co/v1/cohort-66/cards/cardId/likes', { */
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: {

@@ -1,30 +1,3 @@
-/* const initialCards = [
-  {
-    placename: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    placename: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    placename: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    placename: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    placename: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    placename: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-]; */
-
 const popupOpenButtonElement = document.querySelector(".profile__edit-button");
 const popupOpenButtonAddElement = document.querySelector(
   ".profile__add-button"
@@ -42,18 +15,13 @@ const popupAvatarSelector = ".popup_section_edit-avatar";
 const popupDeleteSelector = ".popup_section_delete";
 
 const formsValidator = {};
-//console.log(formsValidator)
 
 const configProfileInfo = {
-  //profileNameSelector: '.popup__input_edit_name',
   profileNameSelector: ".profile__title",
 
-  //profileNameSelector: '#nameInput',
-  //profileJobSelector: '.popup__input_edit_job'
   profileJobSelector: ".profile__subtitle",
   profileAvatar: ".profile__avatar-pic",
 };
-//console.log(configProfileInfo)
 
 const validationObject = {
   inputSelector: ".popup__input",
@@ -63,10 +31,8 @@ const validationObject = {
   disableButtonClass: "popup__button-invalid",
   textErrorActive: "error",
 };
-//console.log(validationObject)
 
 export {
-  /* initialCards, */
   popupOpenButtonElement,
   popupOpenButtonAddElement,
   selectorTemplate,
